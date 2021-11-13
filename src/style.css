@@ -1,7 +1,9 @@
-body {
-  margin: 0 auto;
-  box-sizing: border-box;
-  width: 100%;
-  background-color: black;
-  color: white;
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+body{
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+    /* background-color: black; */
+    font-family: "Poppins", sans-serif;
+    color: white;
 }
