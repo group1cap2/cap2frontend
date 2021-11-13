@@ -1,24 +1,26 @@
 import React from "react";
 import axios from "axios";
-import SingleAudio from "../SingleAudio";
+import SingleBook from "../SingleBook";
 import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./style.css";
 
 const Ebook = () => {
-  const [music, setMusic] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [limit , setLimit]= useState(20);
+const [isLoading , setIsLoading]= useState(false);
   useEffect(() => {
     getPo();
-  }, []);
+  }, [limit]);
   const getPo = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=20"
+      'http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=20'.replace('20', limit)
     );
-    setMusic(response.data.results);
+    setBooks(response.data.results);
   };
 
   return (
-    <div className="audioContainer">
+    <div className="bookContainer">
       <div className="banner">
         <div className="searchBar">
           <input
@@ -33,10 +35,15 @@ const Ebook = () => {
       </div>
       {/* banner end */}
 
-      <div className="audio">
-        {music.map((elem,i) => (
-          <SingleAudio elem={elem} key={i}/>
+      <div className="singleCard">
+        {books.map((elem,i) => (
+          <SingleBook elem={elem} key={i}/>
         ))}
+      </div>
+      <div className="loadMore">
+        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
+          {isLoading ? 'Loading...' : 'Load More'}
+        </button>
       </div>
     </div>
   );
