@@ -1,44 +1,52 @@
 .sidenav {
-    height: 100%;
-    width: 100px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: -20px;
-    background-color: black;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-  #nav{
-    margin-left: 0;
-}
-  .sidenav a {
-    padding: 6px 6px 6px 6px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #fff;
-    display: block;
-    padding-right: 20px;
-  }
-  .sidenav li {
-    list-style: none;
-    text-decoration: none;
-    font-size: 25px;
-    color: #fff;
-    display: block;
-    text-align: right;
+  height: 100%;
+  width: 70px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: -20px;
+  background-color: #141414;
+  overflow-x: hidden;
+  padding-top: 20px;
+  border-right: rgb(48, 48, 48) solid 0.5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 
-  }
   
-  .sidenav a:hover {
-    color: blueviolet;;
+}
+#nav {
+  margin-left: 0;
+}
+.sidenav a {
+  padding: 6px 6px 6px 6px;
+  text-decoration: none;
+  font-size: 25px;
+  color: rgb(104, 103, 103);
+  display: block;
+  padding-right: 20px;
 
-  }
-.navIcons{
-    color: #f1f1f1;
-  }
-  #active{
-
-    color:#f321d0;
+}
+.sidenav li {
+  list-style: none;
+  text-decoration: none;
+  font-size: 25px;
+  color: #fff;
+  display: block;
+  text-align: right;
 }
 
+.sidenav a:hover {
+  color: rgb(255, 254, 254);
+}
+.sidenav a:active {
+  color: #f321d0;
+}
+.navIcons {
+  /* color: #f1f1f1; */
+  color: rgb(117 117 117);
+}
+#active {
+  color: #f321d0;
+}
