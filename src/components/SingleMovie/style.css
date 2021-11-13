@@ -1,6 +1,6 @@
 /* big container */
 .single {
-  background-color: black;
+  background-color: #4343435e;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -71,6 +71,7 @@
   .modalImg{
     width: 20rem;
     height: 24rem;
+    margin: 5px;
       
   }
   #closeIcon {
@@ -122,5 +123,5 @@
       width: 500px;
   }
   #detailsIcon {
-    color: #f321d0;;
-     }
+ color: #f321d0;;
+  }
