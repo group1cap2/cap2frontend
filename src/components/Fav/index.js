@@ -60,13 +60,6 @@ const [favAduio, setFavAudio] = useState([]);
       <div className="banner"></div>
       {/* banner end */}
 
-      {/* Audio */}
-      {favPodcast.length != 0?
-      <div className="singleCard">
-        {favAduio.map((elem, i) => (
-          <SingleMusic elem={elem} key={`a` + i} />
-        ))}
-    </div>:""}
       {/* Movie */}
       {favPodcast.length != 0?
       <div className="singleCard">
@@ -83,6 +76,14 @@ const [favAduio, setFavAudio] = useState([]);
          
       </div>:""}
 
+      {/* Audio */}
+      {favPodcast.length != 0?
+      <div className="singleCard">
+        {favAduio.map((elem, i) => (
+          <SingleMusic elem={elem} key={`a` + i} />
+        ))}
+    </div>:""}
+    
       {/* Podcast */}
       {favPodcast.length != 1?
       <div className="singleCard">
