@@ -7,7 +7,7 @@ import { MdFavorite } from "react-icons/md";
 import "./style.css";
 
 
-const SingleAudio = (props) => {
+const SingleMusic = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
@@ -75,4 +75,4 @@ const SingleAudio = (props) => {
   );
 };
 
-export default SingleAudio;
+export default SingleMusic;

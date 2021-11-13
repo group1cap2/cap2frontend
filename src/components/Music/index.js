@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import SingleAudio from "../SingleAudio";
+import SingleMusic from "../SingleMusic";
 import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./style.css";
@@ -39,7 +39,7 @@ const [isLoading , setIsLoading]= useState(false);
 
       <div className="audio">
         {music.map((elem,i) => (
-          <SingleAudio elem={elem} key={i}/>
+          <SingleMusic elem={elem} key={i}/>
         ))}
       </div>
       <div className="loadMore">
