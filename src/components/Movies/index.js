@@ -7,17 +7,45 @@ import "./style.css";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [moviesFav, setMoviesFav] = useState([]);
   const [limit , setLimit]= useState(20);
+  const [search, setSearch] = useState("all");
   const [isLoading , setIsLoading]= useState(false);
+  let like = false;
+
   useEffect(() => {
-    getPo();
-  }, [limit]);
-  const getPo = async () => {
+    getMovies();
+  }, [limit, search]);
+
+  useEffect(() => {
+    getFavMovies();
+  }, []);
+
+  const getMovies = async () => {
+    setIsLoading(true);
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=20".replace('20', limit)
+      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
     );
-    setMovies(response.data.results);
+    setMovies(response.data);
+    setIsLoading(false);
   };
+
+  const getFavMovies = async () => {
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+    );
+    setMoviesFav(response.data);
+  };
+
+  const setFav = (movie) => {
+    moviesFav.forEach(movieFav => {
+      if(movieFav.trackId === movie.trackId){
+        like = true;
+      } else {
+        like = false;
+      }
+    })
+  }
 
   return (
     <div className="MoviesContainer">
@@ -27,6 +55,7 @@ const Movies = () => {
             id="searchQueryInput"
             type="text"
             placeholder="What are you looking for?"
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button id="searchQuerySubmit" type="submit">
             <FaSearch />{" "}
@@ -36,9 +65,10 @@ const Movies = () => {
       {/* banner end */}
 
       <div className="audio">
-        {movies.map((elem,i) => (
-          <SingleMovie elem={elem} key={i}/>
-        ))}
+        {movies.map((elem,i) => {
+          setFav(elem);
+          return (<SingleMovie elem={elem} like={like} key={i}/>);
+        })}
       </div>
          
       <div className="loadMore">

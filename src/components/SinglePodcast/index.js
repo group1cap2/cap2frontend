@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import { FaWindowClose } from "react-icons/fa";
 import Modal from "react-modal";
 import { CgDetailsMore } from "react-icons/cg";
@@ -7,6 +8,7 @@ import "./style.css";
 
 const SinglePodcast = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [like, setLike] = React.useState(false);
 
   function openModal() {
     setIsOpen(true);
@@ -15,13 +17,24 @@ const SinglePodcast = (props) => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const favorite = async (elem) => {
+    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setPodcastFavorite", {
+      podcast: elem,
+      like: like,
+    });
+    if (like) setLike(false);
+    else setLike(true);
+  };
+
   return (
     <div className="single">
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
         <h3 className="lable">{props.elem.kind}</h3>
         <MdFavorite
-          className={props.elem.isLike ? `icon like` : `icon unlike`}
+          className={like ? `iconlike` : `iconunlike`}
+          onClick={() => favorite(props.elem)} 
         />
       </div>
       <img

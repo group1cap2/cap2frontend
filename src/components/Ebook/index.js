@@ -7,16 +7,21 @@ import "./style.css";
 
 const Ebook = () => {
   const [books, setBooks] = useState([]);
-  const [limit , setLimit]= useState(20);
-const [isLoading , setIsLoading]= useState(false);
+  const [limit, setLimit] = useState(20);
+  const [search, setSearch] = useState("all");
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    getPo();
+    getBooks();
   }, [limit]);
-  const getPo = async () => {
+
+  const getBooks = async () => {
+    setIsLoading(true);
     const response = await axios.get(
-      'http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=20'.replace('20', limit)
+      `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
     );
-    setBooks(response.data.results);
+    setBooks(response.data);
+    setIsLoading(false);
   };
 
   return (
@@ -27,6 +32,7 @@ const [isLoading , setIsLoading]= useState(false);
             id="searchQueryInput"
             type="text"
             placeholder="What are you looking for?"
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button id="searchQuerySubmit" type="submit">
             <FaSearch />{" "}
@@ -36,13 +42,18 @@ const [isLoading , setIsLoading]= useState(false);
       {/* banner end */}
 
       <div className="singleCard">
-        {books.map((elem,i) => (
-          <SingleBook elem={elem} key={i}/>
+        {books.map((elem, i) => (
+          <SingleBook elem={elem} key={i} />
         ))}
       </div>
       <div className="loadMore">
-        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
-          {isLoading ? 'Loading...' : 'Load More'}
+        <button
+          onClick={() => {
+            setLimit(limit + 4);
+          }}
+          className="vewMoreBtn"
+        >
+          {isLoading ? "Loading..." : "Load More"}
         </button>
       </div>
     </div>
