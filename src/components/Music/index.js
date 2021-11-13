@@ -7,20 +7,23 @@ import "./style.css";
 
 const Music = () => {
   const [music, setMusic] = useState([]);
-  const [limit , setLimit]= useState(20);
-const [isLoading , setIsLoading]= useState(false);
+  const [limit, setLimit] = useState(20);
+  const [search, setSearch] = useState("all");
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    getPo();
-  }, [limit]);
-  const getPo = async () => {
+    getMusic();
+  }, [limit, search]);
+
+  const getMusic = async () => {
+    setIsLoading(true);
     const response = await axios.get(
-      'http://itunes.apple.com/search?term=s&country=sa&media=music&limit=20'.replace('20', limit)
+      `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
     );
-    setMusic(response.data.results);
+    setMusic(response.data);
+    setIsLoading(false);
   };
 
-// const loadMore=()=>{
-//   setLimit(limit+5)}
   return (
     <div className="audioContainer">
       <div className="banner">
@@ -29,6 +32,7 @@ const [isLoading , setIsLoading]= useState(false);
             id="searchQueryInput"
             type="text"
             placeholder="What are you looking for?"
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button id="searchQuerySubmit" type="submit">
             <FaSearch />{" "}
@@ -38,13 +42,18 @@ const [isLoading , setIsLoading]= useState(false);
       {/* banner end */}
 
       <div className="audio">
-        {music.map((elem,i) => (
-          <SingleMusic elem={elem} key={i}/>
+        {music.map((elem, i) => (
+          <SingleMusic elem={elem} key={i} />
         ))}
       </div>
       <div className="loadMore">
-        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
-          {isLoading ? 'Loading...' : 'Load More'}
+        <button
+          onClick={() => {
+            setLimit(limit + 4);
+          }}
+          className="vewMoreBtn"
+        >
+          {isLoading ? "Loading..." : "Load More"}
         </button>
       </div>
     </div>

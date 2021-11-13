@@ -8,15 +8,20 @@ import "./style.css";
 const Podcast = () => {
   const [podcasts, setPodcasts] = useState([]);
   const [limit , setLimit]= useState(20);
+  const [search, setSearch] = useState("all");
   const [isLoading , setIsLoading]= useState(false);
+
   useEffect(() => {
-    getPo();
-  }, [limit]);
-  const getPo = async () => {
+    getPodcasts();
+  }, [limit, search]);
+
+  const getPodcasts = async () => {
+    setIsLoading(true);
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=podcast&limit=20".replace('20', limit)
+      `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
     );
-    setPodcasts(response.data.results);
+    setPodcasts(response.data);
+    setIsLoading(false);
   };
 
   return (
@@ -27,6 +32,7 @@ const Podcast = () => {
             id="searchQueryInput"
             type="text"
             placeholder="What are you looking for?"
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button id="searchQuerySubmit" type="submit">
             <FaSearch />{" "}

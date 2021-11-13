@@ -8,51 +8,54 @@ import { useState, useEffect } from "react";
 import "./style.css";
 
 const Fav = () => {
-const [favAduio, setFavAudio] = useState([]);
+  const [favAduio, setFavAudio] = useState([]);
   const [favPodcast, setFavPodcast] = useState([]);
   const [favEbook, setFavEbook] = useState([]);
   const [favMovie, setFavMovie] = useState([]);
-
+  let like = false;
 
   useEffect(() => {
     getFavAudio();
   }, []);
+
   const getFavAudio = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=music&limit=3"
+      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
     );
-    setFavAudio(response.data.results);
+    setFavAudio(response.data);
   };
-
 
   useEffect(() => {
     getFavPodcast();
   }, []);
+
   const getFavPodcast = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=podcast&limit=4"
+      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
     );
-    setFavPodcast(response.data.results);
+    setFavPodcast(response.data);
   };
 
   useEffect(() => {
     getFavEbook();
   }, []);
+
   const getFavEbook = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=4"
+      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
     );
-    setFavEbook(response.data.results);
+    setFavEbook(response.data);
   };
 
   useEffect(() => {
     getFavMovie();
-  }, []);
+  }, [favMovie]);
+
   const getFavMovie = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=4"
+      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
     );
-    setFavMovie(response.data.results);
+    setFavMovie(response.data);
   };
 
   return (
@@ -61,38 +64,49 @@ const [favAduio, setFavAudio] = useState([]);
       {/* banner end */}
 
       {/* Movie */}
-      {favPodcast.length != 0?
-      <div className="singleCard">
-        {favMovie.map((elem, i) => (
-          <SingleMovie elem={elem} key={`m` + i} />
-        ))}
-          </div>:""}
-      {/* Ebook */}
-      {favPodcast.length != 1?
-      <div className="singleCard">
-        {favEbook.map((elem, i) => (
-          <SingleBook elem={elem} key={`b` + i} />
-        ))}
-         
-      </div>:""}
+      {favMovie.length !== 0 ? (
+        <div className="singleCard">
+          {favMovie.map((elem, i) => {
+            return <SingleMovie elem={elem} delete={true} key={`m` + i} />;
+          })}
+        </div>
+      ) : (
+        ""
+      )}
 
       {/* Audio */}
-      {favPodcast.length != 0?
-      <div className="singleCard">
-        {favAduio.map((elem, i) => (
-          <SingleMusic elem={elem} key={`a` + i} />
-        ))}
-    </div>:""}
-    
+      {favAduio.length !== 0 ? (
+        <div className="singleCard">
+          {favAduio.map((elem, i) => (
+            <SingleMusic elem={elem} key={`a` + i} />
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
+
+      {/* Ebook */}
+      {favEbook.length !== 0 ? (
+        <div className="singleCard">
+          {favEbook.map((elem, i) => (
+            <SingleBook elem={elem} key={`b` + i} />
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
+
       {/* Podcast */}
-      {favPodcast.length != 1?
-      <div className="singleCard">
-        {favPodcast.map((elem, i) => (
-          <SinglePodcast elem={elem} key={`p` + i} />
-        ))}
-      </div>:""
-      }
+      {favPodcast.length !== 0 ? (
+        <div className="singleCard">
+          {favPodcast.map((elem, i) => (
+            <SinglePodcast elem={elem} key={`p` + i} />
+          ))}
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
-export default Fav
+export default Fav;

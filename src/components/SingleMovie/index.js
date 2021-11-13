@@ -1,12 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import { FaWindowClose } from "react-icons/fa";
 import Modal from "react-modal";
 import { CgDetailsMore } from "react-icons/cg";
-import { MdFavorite } from "react-icons/md";
+import { MdFavorite, MdDelete } from "react-icons/md";
 import "./style.css";
 
 const SingleMovie = (props) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [like, setLike] = useState(props.like);
+
+  // useEffect(() => {
+  //   console.log(like);
+  // }, [like]);
 
   function openModal() {
     setIsOpen(true);
@@ -15,14 +21,36 @@ const SingleMovie = (props) => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const favorite = async (elem, type) => {
+    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setMovieFavorite", {
+      movie: elem,
+      like: type,
+    });
+    if (like) setLike(false);
+    else setLike(true);
+  };
+
   return (
     <div className="single">
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
         <h3 className="lable">{props.elem.kind}</h3>
-        <MdFavorite
-          className={props.elem.isLike ? `icon like` : `icon unlike`}
+        {props.delete ? (
+          <MdDelete
+          className='iconunlike'
+          onClick={() => favorite(props.elem, true)}
         />
+        ) : (
+          <MdFavorite
+          className={like ? `iconlike` : `iconunlike`}
+          onClick={() => favorite(props.elem, props.like)}
+        />
+        )}
+        {/* <MdFavorite
+          className={like ? `iconlike` : `iconunlike`}
+          onClick={() => favorite(props.elem)}
+        /> */}
       </div>
       <img
         className="singleImg"
