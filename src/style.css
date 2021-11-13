@@ -1,9 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
-body{
-    margin: 0 auto;
-    box-sizing: border-box;
-    width: 100%;
-    /* background-color: black; */
-    font-family: "Poppins", sans-serif;
-    color: white;
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+body {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
+  /* background-color: black; */
+  font-family: "Poppins", sans-serif;
+  color: white;
+}
+p {
+  color: rgb(34, 34, 34);
+}
+.lable {
+  background-color: #f321d0;
+  padding: 4px;
+  border-radius: 20px;
+  font-size: 0.6rem;
 }
