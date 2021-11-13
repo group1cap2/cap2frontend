@@ -56,8 +56,8 @@ const [favAduio, setFavAudio] = useState([]);
   };
 
   return (
-    <div className="bookContainer">
-      <div className="banner"></div>
+    <div className="FavContainer">
+      <div className="bannerFav"></div>
       {/* banner end */}
 
       {/* Movie */}
