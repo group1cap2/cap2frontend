@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import { ImMusic, ImHome,ImBook  } from "react-icons/im";
 import { MdMovieCreation } from "react-icons/md";
-import { FaPodcast, FaSearch } from "react-icons/fa";
+import { FaPodcast, FaSearch, FaItunes } from "react-icons/fa";
 import { MdFavorite } from "react-icons/md";
 import "./style.css";
 
@@ -13,29 +13,19 @@ const Nav = () => {
       <div>
         <ul>
         <li>
-          <Link id="active" to="/">
-            <ImHome />
-          </Link>
+            <FaItunes id="active"/>
         </li>
         </ul>
       </div>
       <ul id="nav">
-
-        <li>
-          <Link to="/Music">
-            <ImMusic />
-          </Link>
-        </li>
-
-        <li>
-          <Link to="/Movies">
+      <li>
+          <Link to="/Video">
             <MdMovieCreation />
           </Link>
         </li>
-
         <li>
-          <Link to="/Podcast">
-            <FaPodcast />
+          <Link to="/Audio">
+            <ImMusic />
           </Link>
         </li>
         <li>
@@ -43,22 +33,23 @@ const Nav = () => {
             <ImBook />
           </Link>
         </li>
-        {/* <li>
-          <Link to="/Search">
-            <FaSearch />
-          </Link>
-        </li> */}
         <li>
-          <Link to="/Fav">
-            <MdFavorite />
+          <Link to="/Podcast">
+            <FaPodcast />
           </Link>
+        </li>
+        <li>
+
         </li>
       </ul>
       <div>
         <ul>
         <li>
-          <Link to="/Login">
+          {/* <Link to="/Login">
             <CgProfile />
+          </Link> */}
+                    <Link to="/Fav">
+            <MdFavorite />
           </Link>
         </li>
         </ul>
@@ -67,3 +58,4 @@ const Nav = () => {
   );
 };
 export default Nav;
+
