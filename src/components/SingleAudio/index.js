@@ -6,6 +6,7 @@ import { CgDetailsMore } from "react-icons/cg";
 import { MdFavorite } from "react-icons/md";
 import "./style.css";
 
+
 const SingleAudio = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
@@ -20,6 +21,7 @@ const SingleAudio = (props) => {
     <div className="single">
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
+        <h3 className="lable">{props.elem.kind}</h3>
         <MdFavorite
           className={props.elem.isLike ? `icon like` : `icon unlike`}
         />
@@ -55,8 +57,8 @@ const SingleAudio = (props) => {
             <h2 id="name">{props.elem.collectionName}</h2>
             <ReactPlayer
               url={props.elem.previewUrl}
-              width="500px"
-              height="40px"
+              width="500"
+              height="400"
               playing={false}
               controls={true}
               className="aduioController"
