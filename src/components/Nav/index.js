@@ -45,9 +45,6 @@ const Nav = () => {
       <div>
         <ul>
         <li>
-          {/* <Link to="/Login">
-            <CgProfile />
-          </Link> */}
                     <Link to="/Fav">
             <MdFavorite />
           </Link>
