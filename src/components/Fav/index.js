@@ -5,49 +5,92 @@ import SingleAudio from "../SingleAudio";
 import SingleMovie from "../SingleMovie";
 import SinglePodcast from "../SinglePodcast";
 import { useState, useEffect } from "react";
-import { FaSearch } from "react-icons/fa";
 import "./style.css";
 
 const Fav = () => {
-  const [fav, setFav] = useState([]);
-  const [limit , setLimit]= useState(20);
-const [isLoading , setIsLoading]= useState(false);
+const [favAduio, setFavAudio] = useState([]);
+  const [favPodcast, setFavPodcast] = useState([]);
+  const [favEbook, setFavEbook] = useState([]);
+  const [favMovie, setFavMovie] = useState([]);
+
+
   useEffect(() => {
-    getPo();
-  }, [limit]);
-  const getPo = async () => {
+    getFavAudio();
+  }, []);
+  const getFavAudio = async () => {
     const response = await axios.get(
-      'http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=20'.replace('20', limit)
+      "http://itunes.apple.com/search?term=s&country=sa&media=music&limit=3"
     );
-    setFav(response.data.results);
+    setFavAudio(response.data.results);
+  };
+
+
+  useEffect(() => {
+    getFavPodcast();
+  }, []);
+  const getFavPodcast = async () => {
+    const response = await axios.get(
+      "http://itunes.apple.com/search?term=s&country=sa&media=podcast&limit=1"
+    );
+    setFavPodcast(response.data.results);
+  };
+
+  useEffect(() => {
+    getFavEbook();
+  }, []);
+  const getFavEbook = async () => {
+    const response = await axios.get(
+      "http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=2"
+    );
+    setFavEbook(response.data.results);
+  };
+
+  useEffect(() => {
+    getFavMovie();
+  }, []);
+  const getFavMovie = async () => {
+    const response = await axios.get(
+      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=5"
+    );
+    setFavMovie(response.data.results);
   };
 
   return (
     <div className="bookContainer">
-      <div className="banner">
-        <div className="searchBar">
-          <input
-            id="searchQueryInput"
-            type="text"
-            placeholder="What are you looking for?"
-          />
-          <button id="searchQuerySubmit" type="submit">
-            <FaSearch />{" "}
-          </button>
-        </div>
-      </div>
+      <div className="banner"></div>
       {/* banner end */}
 
+      {/* Audio */}
+      {favPodcast.length != 0?
       <div className="singleCard">
-        {fav.map((elem,i) => (
-          <SingleBook elem={elem} key={i}/>
+        {favAduio.map((elem, i) => (
+          <SingleAudio elem={elem} key={`a` + i} />
         ))}
-      </div>
-      <div className="loadMore">
-        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
-          {isLoading ? 'Loading...' : 'Load More'}
-        </button>
-      </div>
+    </div>:""}
+      {/* Movie */}
+      {favPodcast.length != 0?
+      <div className="singleCard">
+        {favMovie.map((elem, i) => (
+          <SingleMovie elem={elem} key={`m` + i} />
+        ))}
+          </div>:""}
+      {/* Ebook */}
+      {favPodcast.length != 0?
+      <div className="singleCard">
+        {favEbook.map((elem, i) => (
+          <SingleBook elem={elem} key={`b` + i} />
+        ))}
+         
+      </div>:""}
+
+      {/* Podcast */}
+      {favPodcast.length != 0?
+      <div className="singleCard">
+        {favPodcast.map((elem, i) => (
+          <SinglePodcast elem={elem} key={`p` + i} />
+        ))}
+      </div>:""
+      }
     </div>
   );
 };
