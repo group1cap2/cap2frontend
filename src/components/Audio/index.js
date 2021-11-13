@@ -1,119 +1,53 @@
 import React from "react";
 import axios from "axios";
+import SingleAudio from "../SingleAudio";
 import { useState, useEffect } from "react";
-import Modal from "react-modal";
-import ReactPlayer from "react-player";
-import { CgDetailsMore } from "react-icons/cg";
-import { FaSearch ,FaWindowClose } from "react-icons/fa";
-import {MdFavorite} from "react-icons/md"
+import { FaSearch } from "react-icons/fa";
 import "./style.css";
 
 const Audio = () => {
   const [music, setMusic] = useState([]);
+  const [limit , setLimit]= useState(20);
+const [isLoading , setIsLoading]= useState(false);
   useEffect(() => {
     getPo();
-  }, []);
+  }, [limit]);
   const getPo = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=music&limit=10"
+      'http://itunes.apple.com/search?term=s&country=sa&media=music&limit=20'.replace('20', limit)
+      
     );
     console.log(response.data.results);
     setMusic(response.data.results);
-    console.log(response.data.results);
   };
-  let subtitle;
-  const [modalIsOpen, setIsOpen] = React.useState(false);
 
-  function openModal() {
-    setIsOpen(true);
-  }
-  useEffect(()=>{
-console.log("hi");
-  },[modalIsOpen])
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = "#f00";
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-  const favFunc=(e,i)=>{
-
-      }
+// const loadMore=()=>{
+//   setLimit(limit+5)}
   return (
     <div className="audioContainer">
-      <div className="banner"></div>
-      <div className="search-containe">
-        <form>
-          <input 
-          type="text" 
-          name="search" 
-          placeholder="Search... " />
-          <button>
-            <FaSearch />
+      <div className="banner">
+        <div className="searchBar">
+          <input
+            id="searchQueryInput"
+            type="text"
+            placeholder="What are you looking for?"
+          />
+          <button id="searchQuerySubmit" type="submit">
+            <FaSearch />{" "}
           </button>
-        </form>
+        </div>
       </div>
+      {/* banner end */}
+
       <div className="audio">
-        {music.map((elem) => (
-          <div className="singleAudio">
-            <img
-              className="singleImg"
-              src={elem.artworkUrl100}
-              alt={`card ${elem.collectionName}`}
-            />
-
-            <div className="cardIcons">
-            <CgDetailsMore
-             onClick={openModal} 
-             className="icon" 
-             />
-            <MdFavorite onClick={favFunc} className={elem.isLike ? ` icon like` : `icon unlike`}/> 
-            </div>
-            <h2>{elem.collectionName}</h2>
-
-            <div>
-              <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                className="modal"
-                overlayClassName="overlay"
-                contentLabel="Example Modal"
-                ariaHideApp={false}
-              >
-         
-
-                <div className="modal_content" >
-                <div className="headerModal">
-                <FaWindowClose  id="closeIcon" onClick={closeModal}/>
-                <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-                  {elem.collectionName}
-                </h2>
-                
-                  <img id="gifM" src="https://i.pinimg.com/originals/5c/4a/1c/5c4a1cef8a1ebd3584fac99c817b173c.gif" />
-                  </div>
-                <img
-              className="modalImg"
-              src={elem.artworkUrl100}
-              alt={`card ${elem.collectionName}`}
-            />
-                  <ReactPlayer
-                    url={elem.previewUrl}
-                    width="400px"
-                    height="50px"
-                    playing={false}
-                    controls={true}
-                    className="aduioController"
-                  />
-                  </div>
-               
-              </Modal>
-            </div>
-          </div>
+        {music.map((elem,i) => (
+          <SingleAudio elem={elem} key={i}/>
         ))}
+      </div>
+      <div className="loadMore">
+        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
+          {isLoading ? 'Loading...' : 'Load More'}
+        </button>
       </div>
     </div>
   );
