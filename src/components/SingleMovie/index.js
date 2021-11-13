@@ -1,5 +1,4 @@
 import React from "react";
-import ReactPlayer from "react-player";
 import { FaWindowClose } from "react-icons/fa";
 import Modal from "react-modal";
 import { CgDetailsMore } from "react-icons/cg";
@@ -20,6 +19,7 @@ const SingleMovie = (props) => {
     <div className="single">
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
+        <h3 className="lable">{props.elem.kind}</h3>
         <MdFavorite
           className={props.elem.isLike ? `icon like` : `icon unlike`}
         />
