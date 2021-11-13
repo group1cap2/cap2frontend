@@ -29,7 +29,7 @@
 .iconlike {
   color: #d10171;
   float: right;
-  cursor: pointer;
+  pointer-events: none;
 }
 .iconunlike {
   color: #fff;

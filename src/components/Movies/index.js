@@ -7,28 +7,15 @@ import "./style.css";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [moviesFav, setMoviesFav] = useState([]);
   const [limit , setLimit]= useState(20);
   const [search, setSearch] = useState("all");
   const [isLoading , setIsLoading]= useState(false);
-  let like = false;
-
-  useEffect(() => {
-    getMovies();
-  }, [limit, search]);
+  const [moviesFav, setMoviesFav] = useState([]);
+  let added = false;
 
   useEffect(() => {
     getFavMovies();
   }, []);
-
-  const getMovies = async () => {
-    setIsLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
-    );
-    setMovies(response.data);
-    setIsLoading(false);
-  };
 
   const getFavMovies = async () => {
     const response = await axios.get(
@@ -38,14 +25,27 @@ const Movies = () => {
   };
 
   const setFav = (movie) => {
-    moviesFav.forEach(movieFav => {
-      if(movieFav.trackId === movie.trackId){
-        like = true;
+    moviesFav.forEach((movieFav) => {
+      if (movieFav.trackId === movie.trackId) {
+        added = true;
       } else {
-        like = false;
+        added = false;
       }
-    })
-  }
+    });
+  };
+
+  useEffect(() => {
+    getMovies();
+  }, [limit, search, moviesFav]);
+
+  const getMovies = async () => {
+    setIsLoading(true);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
+    );
+    setMovies(response.data);
+    setIsLoading(false);
+  };
 
   return (
     <div className="MoviesContainer">
@@ -67,7 +67,7 @@ const Movies = () => {
       <div className="audio">
         {movies.map((elem,i) => {
           setFav(elem);
-          return (<SingleMovie elem={elem} like={like} key={i}/>);
+          return (<SingleMovie elem={elem} added={added} key={i}/>);
         })}
       </div>
          
