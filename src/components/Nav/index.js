@@ -19,7 +19,7 @@ const Nav = () => {
       </div>
       <ul id="nav">
       <li>
-          <Link to="/Video">
+          <Link to="/Movies">
             <MdMovieCreation />
           </Link>
         </li>
