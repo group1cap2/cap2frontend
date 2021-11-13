@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import SingleBook from "../SingleBook";
-import SingleAudio from "../SingleAudio";
+import SingleMusic from "../SingleMusic";
 import SingleMovie from "../SingleMovie";
 import SinglePodcast from "../SinglePodcast";
 import { useState, useEffect } from "react";
@@ -64,7 +64,7 @@ const [favAduio, setFavAudio] = useState([]);
       {favPodcast.length != 0?
       <div className="singleCard">
         {favAduio.map((elem, i) => (
-          <SingleAudio elem={elem} key={`a` + i} />
+          <SingleMusic elem={elem} key={`a` + i} />
         ))}
     </div>:""}
       {/* Movie */}
