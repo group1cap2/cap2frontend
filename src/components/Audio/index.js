@@ -15,9 +15,7 @@ const [isLoading , setIsLoading]= useState(false);
   const getPo = async () => {
     const response = await axios.get(
       'http://itunes.apple.com/search?term=s&country=sa&media=music&limit=20'.replace('20', limit)
-      
     );
-    console.log(response.data.results);
     setMusic(response.data.results);
   };
 
