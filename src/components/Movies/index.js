@@ -5,16 +5,21 @@ import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./style.css";
 
-const Video = () => {
-  const [music, setMusic] = useState([]);
+const Movies = () => {
+  const [movies, setMovies] = useState([]);
+  const [limit, setLimit] = useState(20);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     getPo();
-  }, []);
+  }, [limit]);
   const getPo = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=20"
+      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=20".replace(
+        "20",
+        limit
+      )
     );
-    setMusic(response.data.results);
+    setMovies(response.data.results);
   };
 
   return (
@@ -33,12 +38,22 @@ const Video = () => {
       </div>
       {/* banner end */}
 
-      <div className="audio">
-        {music.map((elem,i) => (
-          <SingleMovie elem={elem} key={i}/>
+      <div className="movies">
+        {movies.map((elem, i) => (
+          <SingleMovie elem={elem} key={i} />
         ))}
+      </div>
+      <div className="loadMore">
+        <button
+          onClick={() => {
+            setLimit(limit + 4);
+          }}
+          className="vewMoreBtn"
+        >
+          {isLoading ? "Loading..." : "Load More"}
+        </button>
       </div>
     </div>
   );
 };
-export default Video;
+export default Movies;

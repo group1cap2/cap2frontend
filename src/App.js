@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from "react-router-dom";
 import Home from './components/Home';
 import Audio from './components/Audio';
-import Video from './components/Video';
+import Video from './components/Movies';
 import Ebook from './components/Ebook';
 import Podcast from './components/Podcast';
 import Login from './components/Login';
