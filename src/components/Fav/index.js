@@ -49,7 +49,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavMovie();
-  }, [favMovie]);
+  }, []);
 
   const getFavMovie = async () => {
     const response = await axios.get(
