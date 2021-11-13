@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { FaSearch } from "react-icons/fa";
 import "./style.css";
 
-const Audio = () => {
+const Music = () => {
   const [music, setMusic] = useState([]);
   const [limit , setLimit]= useState(20);
 const [isLoading , setIsLoading]= useState(false);
@@ -50,4 +50,4 @@ const [isLoading , setIsLoading]= useState(false);
     </div>
   );
 };
-export default Audio;
+export default Music;

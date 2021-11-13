@@ -23,7 +23,7 @@ const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link to="/Audio">
+          <Link to="/Music">
             <ImMusic />
           </Link>
         </li>
