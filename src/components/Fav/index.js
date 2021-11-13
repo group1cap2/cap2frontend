@@ -12,11 +12,11 @@ const Fav = () => {
   const [favPodcast, setFavPodcast] = useState([]);
   const [favEbook, setFavEbook] = useState([]);
   const [favMovie, setFavMovie] = useState([]);
-  let like = false;
+
 
   useEffect(() => {
     getFavAudio();
-  }, []);
+  }, [favAduio]);
 
   const getFavAudio = async () => {
     const response = await axios.get(
@@ -27,7 +27,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavPodcast();
-  }, []);
+  }, [favPodcast]);
 
   const getFavPodcast = async () => {
     const response = await axios.get(
@@ -38,25 +38,25 @@ const Fav = () => {
 
   useEffect(() => {
     getFavEbook();
-  }, []);
+  }, [favEbook]);
 
   const getFavEbook = async () => {
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
     );
     setFavEbook(response.data);
-  };
-
-  useEffect(() => {
-    getFavMovie();
-  }, [favMovie]);
-
+  };  
   const getFavMovie = async () => {
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
     );
     setFavMovie(response.data);
   };
+  useEffect(() => {
+    getFavMovie();
+  },[favMovie]);
+
+
 
   return (
     <div className="FavContainer">
@@ -78,7 +78,7 @@ const Fav = () => {
       {favAduio.length !== 0 ? (
         <div className="singleCard">
           {favAduio.map((elem, i) => (
-            <SingleMusic elem={elem} key={`a` + i} />
+            <SingleMusic elem={elem} delete={true} key={`a` + i} />
           ))}
         </div>
       ) : (
@@ -89,7 +89,7 @@ const Fav = () => {
       {favEbook.length !== 0 ? (
         <div className="singleCard">
           {favEbook.map((elem, i) => (
-            <SingleBook elem={elem} key={`b` + i} />
+            <SingleBook elem={elem} delete={true} key={`b` + i} />
           ))}
         </div>
       ) : (
@@ -100,7 +100,7 @@ const Fav = () => {
       {favPodcast.length !== 0 ? (
         <div className="singleCard">
           {favPodcast.map((elem, i) => (
-            <SinglePodcast elem={elem} key={`p` + i} />
+            <SinglePodcast elem={elem} delete={true} key={`p` + i} />
           ))}
         </div>
       ) : (

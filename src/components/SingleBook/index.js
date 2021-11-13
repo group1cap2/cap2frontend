@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import { FaWindowClose } from "react-icons/fa";
 import Modal from "react-modal";
 import { CgDetailsMore } from "react-icons/cg";
-import { MdFavorite } from "react-icons/md";
+import { MdFavorite, MdDelete } from "react-icons/md";
 import "./style.css";
 
 const SingleBook = (props) => {
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [like, setLike] = React.useState(false);
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [like, setLike] = useState(props.added);
 
   function openModal() {
     setIsOpen(true);
@@ -18,27 +19,36 @@ const SingleBook = (props) => {
     setIsOpen(false);
   }
 
-  const favorite = async (elem) => {
+  const favorite = async (elem,type) => {
     const response = await axios.put(
       "https://group1-cap2backend.herokuapp.com/setBookFavorite",
       {
         book: elem,
-        like: like,
+        like: type,
       }
     );
-    if (like) setLike(false);
-    else setLike(true);
+    setLike(true);
   };
 
   return (
     <div className="single">
       <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon" id="detailsIcon" />
-        <h3 className="lable">{props.elem.kind}</h3>
-        <MdFavorite
-          className={like ? `iconlike` : `iconunlike`}
-          onClick={() => favorite(props.elem)}
-        />
+        {props.delete ? (
+          <MdDelete
+            className="iconunlike"
+            onClick={() => favorite(props.elem, true)}
+          />
+        ) : props.added ? (
+          <MdFavorite
+            className='iconlike'
+          />
+        ) : (
+          <MdFavorite
+            className={like ? 'iconlike' : 'iconunlike'}
+            onClick={() => favorite(props.elem, false)}
+          />
+        )}
       </div>
       <img
         className="singleImg"

@@ -10,7 +10,7 @@ const Podcast = () => {
   const [limit , setLimit]= useState(20);
   const [search, setSearch] = useState("all");
   const [isLoading , setIsLoading]= useState(false);
-
+  let added = false;
   useEffect(() => {
     getPodcasts();
   }, [limit, search]);
@@ -23,6 +23,27 @@ const Podcast = () => {
     setPodcasts(response.data);
     setIsLoading(false);
   };
+  useEffect(() => {
+    getFavPodcast();
+  }, []);
+
+  const [podcastFav, setPodcastFav] = useState([]);
+  const getFavPodcast = async () => {
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+    );
+    setPodcastFav(response.data);
+  };
+  const setFav = (podcast) => {
+    podcastFav.forEach((podcastFav) => {
+      if (podcastFav.trackId === podcast.trackId) {
+        added = true;
+      } else {
+        added = false;
+      }
+    });
+  };
+
 
   return (
     <div className="podCastContainer">
@@ -42,9 +63,10 @@ const Podcast = () => {
       {/* banner end */}
 
       <div className="singleCard">
-        {podcasts.map((elem,i) => (
-          <SinglePodcast elem={elem} key={i}/>
-        ))}
+        {podcasts.map((elem,i) => {
+          setFav(elem);
+          return (<SinglePodcast elem={elem} added={added} key={i}/>);
+        })}
       </div>
       <div className="loadMore">
         <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">

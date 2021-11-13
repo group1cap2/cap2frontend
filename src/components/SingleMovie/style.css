@@ -79,6 +79,7 @@
 #closeIcon {
   font-weight: bolder;
   font-size: large;
+  display: none;
 }
 .aduioController {
   margin: 1rem auto;
