@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     background-size: 100% 20rem;
   }
-  .audio {
+  .movies {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     margin: 0 auto;
