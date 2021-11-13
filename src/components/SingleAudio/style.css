@@ -1,6 +1,6 @@
 /* big container */
 .single {
-  background-color: black;
+  background-color: #141414d4;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
