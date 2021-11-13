@@ -30,7 +30,7 @@ const [favAduio, setFavAudio] = useState([]);
   }, []);
   const getFavPodcast = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=podcast&limit=1"
+      "http://itunes.apple.com/search?term=s&country=sa&media=podcast&limit=4"
     );
     setFavPodcast(response.data.results);
   };
@@ -40,7 +40,7 @@ const [favAduio, setFavAudio] = useState([]);
   }, []);
   const getFavEbook = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=2"
+      "http://itunes.apple.com/search?term=s&country=sa&media=ebook&limit=4"
     );
     setFavEbook(response.data.results);
   };
@@ -50,7 +50,7 @@ const [favAduio, setFavAudio] = useState([]);
   }, []);
   const getFavMovie = async () => {
     const response = await axios.get(
-      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=5"
+      "http://itunes.apple.com/search?term=s&country=sa&media=movie&limit=4"
     );
     setFavMovie(response.data.results);
   };
@@ -75,7 +75,7 @@ const [favAduio, setFavAudio] = useState([]);
         ))}
           </div>:""}
       {/* Ebook */}
-      {favPodcast.length != 0?
+      {favPodcast.length != 1?
       <div className="singleCard">
         {favEbook.map((elem, i) => (
           <SingleBook elem={elem} key={`b` + i} />
@@ -84,7 +84,7 @@ const [favAduio, setFavAudio] = useState([]);
       </div>:""}
 
       {/* Podcast */}
-      {favPodcast.length != 0?
+      {favPodcast.length != 1?
       <div className="singleCard">
         {favPodcast.map((elem, i) => (
           <SinglePodcast elem={elem} key={`p` + i} />
@@ -94,4 +94,4 @@ const [favAduio, setFavAudio] = useState([]);
     </div>
   );
 };
-export default Fav;
+export default Fav

@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Audio from "./components/Audio";
+import Audio from "./components/Music";
 import Movies from "./components/Movies";
 import Ebook from "./components/Ebook";
 import Podcast from "./components/Podcast";
@@ -16,7 +16,7 @@ const App = () => {
       <Nav />
       <Routes>
         <Route exact path="/" element={<Movies />} />
-        <Route exact path="/Audio" element={<Audio />} />
+        <Route exact path="/Music" element={<Audio />} />
         <Route exact path="/Movies" element={<Movies />} />
         <Route exact path="/Ebook" element={<Ebook />} />
         <Route exact path="/Podcast" element={<Podcast />} />
