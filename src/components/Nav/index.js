@@ -22,13 +22,13 @@ const Nav = () => {
       <ul id="nav">
 
         <li>
-          <Link to="/Audio">
+          <Link to="/Music">
             <ImMusic />
           </Link>
         </li>
 
         <li>
-          <Link to="/Video">
+          <Link to="/Movies">
             <MdMovieCreation />
           </Link>
         </li>
