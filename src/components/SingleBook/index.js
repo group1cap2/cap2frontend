@@ -18,12 +18,12 @@ const SingleBook = (props) => {
     setIsOpen(false);
   }
 
-  const favorite = async (elem) => {
+  const favorite = async (elem,type) => {
     const response = await axios.put(
       "https://group1-cap2backend.herokuapp.com/setBookFavorite",
       {
         book: elem,
-        like: like,
+        like: type,
       }
     );
     setLike(true);
