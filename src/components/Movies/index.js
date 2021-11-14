@@ -11,30 +11,29 @@ const Movies = () => {
   const [search, setSearch] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
   const [moviesFav, setMoviesFav] = useState([]);
-  let added = false;
 
   useEffect(() => {
     getFavMovies();
-  }, [added]);
+  }, []);
 
   const getFavMovies = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+      `http://localhost:5000/getMoviesFavorite`
     );
     setMoviesFav(response.data);
     setIsLoading(false);
   };
 
-  const setFav = (movie) => {
-    moviesFav.forEach((movieFav) => {
-      if (movieFav.trackId === movie.trackId) {
-        added = true;
-      } else {
-        added = false;
-      }
-    });
-  };
+  // const setFav = (movie) => {
+  //   moviesFav.forEach((movieFav) => {
+  //     if (movieFav.trackId === movie.trackId) {
+  //       return  true;
+  //     } else {
+  //       return false;
+  //     }
+  //   });
+  // };
 
   useEffect(() => {
     getMovies();
@@ -43,7 +42,7 @@ const Movies = () => {
   const getMovies = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
+      `http://localhost:5000/movies?search=${search}&limit=${limit}`
     );
     setMovies(response.data);
     setIsLoading(false);
@@ -64,12 +63,16 @@ const Movies = () => {
           </button>
         </div>
       </div>
+
       {/* banner end */}
 
       <div className="audio">
-        {movies.map((elem, i) => {
-          setFav(elem);
-          return <SingleMovie elem={elem} added={added} key={i} />;
+        {movies.map((elem) => {
+          if (moviesFav.find(movie => movie.trackId == elem.trackId)){
+            return <SingleMovie elem={elem} like={true} key={elem.trackId} />;
+          } else {
+            return <SingleMovie elem={elem} like={false} key={elem.trackId} />;
+          }
         })}
       </div>
 

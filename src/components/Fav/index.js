@@ -12,26 +12,25 @@ const Fav = () => {
   const [favPodcast, setFavPodcast] = useState([]);
   const [favEbook, setFavEbook] = useState([]);
   const [favMovie, setFavMovie] = useState([]);
-  let like = false;
 
   useEffect(() => {
     getFavAudio();
-  },[]);
+  },[favAduio]);
 
   const getFavAudio = async () => {
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
+      `http://localhost:5000/getMusicFavorite`
     );
     setFavAudio(response.data);
   };
 
   useEffect(() => {
     getFavPodcast();
-  },[]);
+  },[favPodcast]);
 
   const getFavPodcast = async () => {
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
+      `http://localhost:5000/getPodcastsFavorite`
     );
     setFavPodcast(response.data);
 
@@ -40,11 +39,11 @@ const Fav = () => {
   useEffect(() => {
     getFavEbook();
 
-  },[]);
+  },[favEbook]);
 
   const getFavEbook = async () => {
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
+      `http://localhost:5000/getBooksFavorite`
     );
     setFavEbook(response.data);
    
@@ -52,11 +51,11 @@ const Fav = () => {
 
   useEffect(() => {
     getFavMovie();
-  },[]);
+  },[favMovie]);
 
   const getFavMovie = async () => {
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+      `http://localhost:5000/getMoviesFavorite`
     );
     setFavMovie(response.data);
   };
@@ -71,7 +70,7 @@ const Fav = () => {
       {favMovie.length !== 0 ? (
         <div className="singleCard">
           {favMovie.map((elem, i) => {
-            return <SingleMovie elem={elem}  delete={true} key={`m` + i} />;
+            return <SingleMovie elem={elem} delete={true} key={`m` + i} />;
           })}
         </div>
       ) : (
@@ -82,7 +81,7 @@ const Fav = () => {
       {favAduio.length !== 0 ? (
         <div className="singleCard">
           {favAduio.map((elem, i) => (
-            <SingleMusic elem={elem} delete={true}  key={`a` + i} />
+            <SingleMusic elem={elem} delete={true} key={`a` + i} />
           ))}
         </div>
       ) : (

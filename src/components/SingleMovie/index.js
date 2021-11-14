@@ -8,7 +8,7 @@ import "./style.css";
 
 const SingleMovie = (props) => {
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [like, setLike] = useState(props.added);
+  const [like, setLike] = useState(props.like);
 
   function openModal() {
     setIsOpen(true);
@@ -20,7 +20,7 @@ const SingleMovie = (props) => {
 
   const favorite = async (elem, type) => {
     const response = await axios.put(
-      "https://group1-cap2backend.herokuapp.com/setMovieFavorite",
+      "http://localhost:5000/setMovieFavorite",
       {
         movie: elem,
         like: type,
@@ -76,10 +76,10 @@ const SingleMovie = (props) => {
           <img
             className="modalImg"
             src={props.elem.artworkUrl100.replace("100x100", "1200x1200")}
-            alt={`card ${props.elem.collectionName}`}
+            alt={`card ${props.elem.trackName}`}
           />
           <div className="details">
-            <h2 id="name">{props.elem.collectionName}</h2>
+            <h2 id="name">{props.elem.trackName}</h2>
             <video
               src={props.elem.previewUrl}
               width="500px"

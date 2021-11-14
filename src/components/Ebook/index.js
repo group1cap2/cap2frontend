@@ -11,45 +11,37 @@ const Ebook = () => {
   const [search, setSearch] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
   const [ebookFav, setFavEbook] = useState([]);
-  let added = false;
+
+  useEffect(() => {
+    setLimit(20)
+    getBooks();
+  }, [search]);
 
   useEffect(() => {
     getBooks();
-  }, [limit,search]);
+  }, [limit]);
+
+  useEffect(() => {
+    getFavEbook();
+  }, []);
 
   const getBooks = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
+      `http://localhost:5000/books?search=${search}&limit=${limit}`
     );
     setBooks(response.data);
     setIsLoading(false);
   };
 
-
-  useEffect(() => {
-    getFavEbook();
-  }, [added]);
-
   const getFavEbook = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
+      `http://localhost:5000/getBooksFavorite`
     );
     setFavEbook(response.data);
     setIsLoading(false);
   };
-
-  const setFav = (element) => {
-    ebookFav.forEach((elm) => {
-      if (elm.trackId === element.trackId) {
-        added = true;
-      } else {
-        added = false;
-      }
-    });
-  };
-
 
   return (
     <div className="bookContainer">
@@ -69,11 +61,15 @@ const Ebook = () => {
       {/* banner end */}
 
       <div className="singleCard">
-        {books.map((elem, i) => {
-          setFav(elem);
-          return (<SingleBook elem={elem} added={added} key={i}/>);
+        {books.map((elem) => {
+          if (ebookFav.find((book) => book.trackId == elem.trackId)) {
+            return <SingleBook elem={elem} like={true} key={elem.trackId} />;
+          } else {
+            return <SingleBook elem={elem} like={false} key={elem.trackId} />;
+          }
         })}
       </div>
+
       <div className="loadMore">
         <button
           onClick={() => {
