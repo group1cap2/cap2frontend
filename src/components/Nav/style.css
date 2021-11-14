@@ -41,7 +41,7 @@
   color: rgb(255, 254, 254);
 }
 .sidenav a:active {
-  color: #e14287;
+  color:  #d533af;
 
 }
 .navIcons {
@@ -49,7 +49,7 @@
   color: rgb(117 117 117);
 }
 #active {
-  color: #e14287;
+  color:  #d533af;
   font-size: 2.5rem;
   margin-right: 1rem;
 }
