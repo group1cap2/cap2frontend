@@ -15,7 +15,7 @@ const Podcast = () => {
 
   useEffect(() => {
     getFavPodcast();
-  }, []);
+  }, [added]);
 
   const getFavPodcast = async () => {
     setIsLoading(true);

@@ -16,7 +16,7 @@ const Music = () => {
 
   useEffect(() => {
     getFavAudio();
-  }, []);
+  }, [added]);
 
   const getFavAudio = async () => {
     const response = await axios.get(
