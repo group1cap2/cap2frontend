@@ -30,7 +30,7 @@ const SinglePodcast = (props) => {
     <div className="single">
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
-        <h3 className="lable">{props.elem.kind}</h3>
+        {props.delete ? (<h3 className="lable">{props.elem.kind.toUpperCase()}</h3>) : ('')}
         {props.delete ? (
           <MdDelete
             className="iconunlike"

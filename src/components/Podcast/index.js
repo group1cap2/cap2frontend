@@ -7,9 +7,9 @@ import "./style.css";
 
 const Podcast = () => {
   const [podcasts, setPodcasts] = useState([]);
-  const [limit , setLimit]= useState(20);
+  const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
-  const [isLoading , setIsLoading]= useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [podcastFav, setFavPodcast] = useState([]);
 
   useEffect(() => {
@@ -17,16 +17,14 @@ const Podcast = () => {
   }, []);
 
   const getFavPodcast = async () => {
-    setIsLoading(true);
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
     );
     setFavPodcast(response.data);
-    setIsLoading(false);
   };
 
   useEffect(() => {
-    setLimit(20)
+    setLimit(20);
     getPodcasts();
   }, [search]);
 
@@ -60,22 +58,46 @@ const Podcast = () => {
       </div>
       {/* banner end */}
 
-      <div className="singleCard">
-        {podcasts.map((elem) => {
-          if (podcastFav.find((podcast) => podcast.trackId == elem.trackId)) {
-            return <SinglePodcast elem={elem} like={true} key={elem.trackId} />;
-          } else {
-            return <SinglePodcast elem={elem} like={false} key={elem.trackId} />;
-          }
-        })}
-      </div>
+      {!isLoading ? (
+        <>
+          <div className="singleCard">
+            {podcasts.map((elem) => {
+              if (
+                podcastFav.find((podcast) => podcast.trackId == elem.trackId)
+              ) {
+                return (
+                  <SinglePodcast elem={elem} like={true} key={elem.trackId} />
+                );
+              } else {
+                return (
+                  <SinglePodcast elem={elem} like={false} key={elem.trackId} />
+                );
+              }
+            })}
+          </div>
 
-      <div className="loadMore">
-        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
-          {isLoading ? 'Loading...' : 'Load More'}
-        </button>
-      </div>
-      </div>
+          <div className="loadMore">
+            <button
+              onClick={() => {
+                setLimit(limit + 4);
+              }}
+              className="vewMoreBtn"
+            >
+              Load More
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="loading">
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
+    </div>
   );
-}
+};
 export default Podcast;

@@ -15,7 +15,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavAudio();
-  }, [favAduio]);
+  },[favAduio]);
 
   const getFavAudio = async () => {
 
@@ -28,7 +28,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavPodcast();
-  }, [favPodcast]);
+  },[favPodcast]);
 
   const getFavPodcast = async () => {
     const response = await axios.get(
@@ -39,7 +39,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavEbook();
-  }, [favEbook]);
+  },[favEbook]);
 
   const getFavEbook = async () => {
 
@@ -52,7 +52,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavMovie();
-  }, [favMovie]);
+  },[favMovie]);
 
   const getFavMovie = async () => {
 
@@ -67,7 +67,7 @@ const Fav = () => {
     <div className="FavContainer">
       <div className="bannerFav"></div>
       {/* banner end */}
-
+      
       {/* Movie */}
       {favMovie.length !== 0 ? (
         <div className="singleCard">

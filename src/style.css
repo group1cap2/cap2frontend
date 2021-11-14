@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
+
 body {
   margin: 0 auto;
   box-sizing: border-box;
@@ -7,9 +8,11 @@ body {
   font-family: "Poppins", sans-serif;
   color: white;
 }
+
 p {
   color: rgb(194, 193, 193);
 }
+
 .lable {
   background-color:  #363636;
   padding: 4px;
