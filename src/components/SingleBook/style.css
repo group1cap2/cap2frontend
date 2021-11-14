@@ -1,6 +1,6 @@
 /* big container */
 .single {
-  background-color:  #2c2c2c94;
+  background-color: #2c2c2c94;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -28,9 +28,8 @@
   cursor: pointer;
 }
 .iconlike {
-  color:  #d533af;
+  color: #d533af;
   float: right;
-  cursor: pointer;
   pointer-events: none;
 }
 .iconunlike {
@@ -80,6 +79,7 @@
 #closeIcon {
   font-weight: bolder;
   font-size: large;
+  cursor: pointer;
 }
 .aduioController {
   margin: 1rem auto;
@@ -125,32 +125,36 @@ audio {
   width: 500px;
 }
 #detailsIcon {
-  color:  #d533af;
+  color: #d533af;
 }
 
 .desc {
   width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 12; /* number of lines to show */
+  line-height: X; /* fallback */
+  max-height: X * 12;
 }
 
 @media only screen and (max-width: 450px) {
-  .modalDetails{
-      flex-direction: column;
-  }
-  .modalImg{
-    width: 50%;
-    height: 50%;   
-  }
-
-}
-
-
-@media only screen and (max-width: 750px) {
-  .modalDetails{
+  .modalDetails {
     flex-direction: column;
   }
-  .modalImg{
+  .modalImg {
     width: 50%;
-    height: 50%;   
+    height: 50%;
   }
+}
 
+@media only screen and (max-width: 750px) {
+  .modalDetails {
+    flex-direction: column;
+  }
+  .modalImg {
+    width: 50%;
+    height: 50%;
+  }
 }

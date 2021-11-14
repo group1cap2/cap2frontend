@@ -15,22 +15,22 @@ const Fav = () => {
 
   useEffect(() => {
     getFavAudio();
-  },[]);
+  },[favAduio]);
 
   const getFavAudio = async () => {
     const response = await axios.get(
-      `http://localhost:5000/getMusicFavorite`
+      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
     );
     setFavAudio(response.data);
   };
 
   useEffect(() => {
     getFavPodcast();
-  },[]);
+  },[favPodcast]);
 
   const getFavPodcast = async () => {
     const response = await axios.get(
-      `http://localhost:5000/getPodcastsFavorite`
+      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
     );
     setFavPodcast(response.data);
 
@@ -39,11 +39,11 @@ const Fav = () => {
   useEffect(() => {
     getFavEbook();
 
-  },[]);
+  },[favEbook]);
 
   const getFavEbook = async () => {
     const response = await axios.get(
-      `http://localhost:5000/getBooksFavorite`
+      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
     );
     setFavEbook(response.data);
    
@@ -51,11 +51,11 @@ const Fav = () => {
 
   useEffect(() => {
     getFavMovie();
-  },[]);
+  },[favMovie]);
 
   const getFavMovie = async () => {
     const response = await axios.get(
-      `http://localhost:5000/getMoviesFavorite`
+      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
     );
     setFavMovie(response.data);
   };
@@ -65,7 +65,7 @@ const Fav = () => {
     <div className="FavContainer">
       <div className="bannerFav"></div>
       {/* banner end */}
-
+      
       {/* Movie */}
       {favMovie.length !== 0 ? (
         <div className="singleCard">

@@ -9,7 +9,7 @@ const Music = () => {
   const [music, setMusic] = useState([]);
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [audioFav, setFavAudio] = useState([]);
 
   useEffect(() => {
@@ -17,7 +17,9 @@ const Music = () => {
   }, []);
 
   const getFavAudio = async () => {
-    const response = await axios.get(`http://localhost:5000/getMusicFavorite`);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
+    );
     setFavAudio(response.data);
   };
 
@@ -33,7 +35,7 @@ const Music = () => {
   const getMusic = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/music?search=${search}&limit=${limit}`
+      `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
     );
     setMusic(response.data);
     setIsLoading(false);
@@ -56,26 +58,43 @@ const Music = () => {
       </div>
       {/* banner end */}
 
-      <div className="audio">
-        {music.map((elem) => {
-          if (audioFav.find((song) => song.trackId == elem.trackId)) {
-            return <SingleMusic elem={elem} like={true} key={elem.trackId} />;
-          } else {
-            return <SingleMusic elem={elem} like={false} key={elem.trackId} />;
-          }
-        })}
-      </div>
+      {!isLoading ? (
+        <>
+          <div className="audio">
+            {music.map((elem) => {
+              if (audioFav.find((song) => song.trackId == elem.trackId)) {
+                return (
+                  <SingleMusic elem={elem} like={true} key={elem.trackId} />
+                );
+              } else {
+                return (
+                  <SingleMusic elem={elem} like={false} key={elem.trackId} />
+                );
+              }
+            })}
+          </div>
 
-      <div className="loadMore">
-        <button
-          onClick={() => {
-            setLimit(limit + 5);
-          }}
-          className="vewMoreBtn"
-        >
-          {isLoading ? "Loading..." : "Load More"}
-        </button>
-      </div>
+          <div className="loadMore">
+            <button
+              onClick={() => {
+                setLimit(limit + 4);
+              }}
+              className="vewMoreBtn"
+            >
+              Load More
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="loading">
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

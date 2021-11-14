@@ -44,8 +44,6 @@
   opacity: 1;
   width: 70%;
   margin: 3.5rem auto;
-  /* top: 3rem;
-    left: 10rem; */
   padding: 0 15px 15px 15px;
   border: none;
   background-color: #0c0c0d;
@@ -56,7 +54,7 @@
 }
 
 .modal_content {
-  height: 80%;
+  height: 60%;
   width: 80%;
   color: black;
   margin: 20px auto;
@@ -72,14 +70,15 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.527);
 }
-.modalImg {
-  width: 20rem;
-  height: 24rem;
+.modalDetails .modalImg {
+  width: 25rem;
+  height: 30rem;
   margin: 5px;
 }
 #closeIcon {
   font-weight: bolder;
   font-size: large;
+  cursor: pointer;
 }
 .aduioController {
   margin: 1rem auto;
@@ -97,7 +96,7 @@
   align-items: center;
 }
 .itouns {
-  margin-top: 5px;
+  margin-top: 1rem;
   width: 60px;
   height: 60px;
 }
@@ -108,9 +107,9 @@
   align-items: center;
   background-color: #f6f6f6;
 }
-.details {
+.modalDetails .details {
   width: 90%;
-  height: 90%;
+  height: 95%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -143,6 +142,7 @@ audio {
 @media only screen and (max-width: 750px) {
   .modalDetails{
     flex-direction: column;
+    height: 50%;
   }
   .modalImg{
     width: 50%;

@@ -21,7 +21,7 @@ const SingleMusic = (props) => {
   }
 
   const favorite = async (elem,type) => {
-    const response = await axios.put("http://localhost:5000/setMusicFavorite", {
+    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setMusicFavorite", {
       song: elem,
       like: type,
     });
@@ -32,7 +32,7 @@ const SingleMusic = (props) => {
     <div className="single">
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
-        <h3 className="lable">{props.elem.kind}</h3>
+        {props.delete ? (<h3 className="lable">{props.elem.kind.toUpperCase()}</h3>) : ('') }
         {props.delete ? (
           <MdDelete
             className="iconunlike"
@@ -66,7 +66,7 @@ const SingleMusic = (props) => {
         <div className="headerModal">
           <img
             id="gifM"
-            alt={`${props.elem.collectionName} img`}
+            alt={`${props.elem.trackName} img`}
             src="https://i.pinimg.com/originals/5c/4a/1c/5c4a1cef8a1ebd3584fac99c817b173c.gif"
           />
           <FaWindowClose id="closeIcon" onClick={closeModal} />
@@ -75,10 +75,10 @@ const SingleMusic = (props) => {
           <img
             className="modalImg"
             src={props.elem.artworkUrl100.replace('100x100', '1200x1200')}
-            alt={`card ${props.elem.collectionName}`}
+            alt={`card ${props.elem.trackName}`}
           />
           <div className="details">
-            <h2 id="name">{props.elem.collectionName}</h2>
+            <h2 id="name">{props.elem.trackName}</h2>
             <ReactPlayer
               url={props.elem.previewUrl}
               width="500"

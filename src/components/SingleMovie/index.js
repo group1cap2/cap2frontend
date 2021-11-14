@@ -20,7 +20,7 @@ const SingleMovie = (props) => {
 
   const favorite = async (elem, type) => {
     const response = await axios.put(
-      "http://localhost:5000/setMovieFavorite",
+      "https://group1-cap2backend.herokuapp.com/setMovieFavorite",
       {
         movie: elem,
         like: type,
@@ -33,7 +33,7 @@ const SingleMovie = (props) => {
     <div className="single">
       <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon" id="detailsIcon" />
-        <h3 className="lable">{props.elem.kind}</h3>
+        {props.delete ? (<h3 className="lable">{props.elem.kind.toUpperCase()}</h3>) : ('') }
         {props.delete ? (
           <MdDelete
             className="iconunlike"
@@ -62,7 +62,7 @@ const SingleMovie = (props) => {
         className="modal"
         overlayClassName="overlay"
         contentLabel="Example Modal"
-        ariaHideApp={true}
+        ariaHideApp={false}
       >
         <div className="headerModal">
           <img
