@@ -69,7 +69,7 @@ const Podcast = () => {
       <div className="singleCard">
         {podcasts.map((elem,i) =>  {
           setFav(elem)
-          return <SingleMovie elem={elem} added={added} key={i} />;
+          return <SinglePodcast elem={elem} added={added} key={i} />;
         })}
       </div>
 
