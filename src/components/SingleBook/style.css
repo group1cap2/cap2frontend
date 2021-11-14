@@ -45,8 +45,6 @@
   opacity: 1;
   width: 70%;
   margin: 3.5rem auto;
-  /* top: 3rem;
-    left: 10rem; */
   padding: 0 15px 15px 15px;
   border: none;
   background-color: #0c0c0d;
@@ -76,6 +74,7 @@
 .modalImg {
   width: 20rem;
   height: 24rem;
+
 }
 #closeIcon {
   font-weight: bolder;

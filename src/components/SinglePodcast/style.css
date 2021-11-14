@@ -72,8 +72,8 @@
   background-color: rgba(0, 0, 0, 0.527);
 }
 .modalImg {
-  width: 50%;
-  height: 50%;
+  width: 20rem;
+  height: 24rem;
 }
 #closeIcon {
   font-weight: bolder;
