@@ -126,6 +126,8 @@
      @media only screen and (max-width: 450px) {
        .modal{
          height: 90%;
+         margin: 1rem auto;
+         padding:0 5px 5px 5px;
        }
       .modalDetails{
           flex-direction: column;
@@ -149,6 +151,8 @@
     @media only screen and (max-width: 750px) {
       .modal{
         height: 90%;
+        margin: 1rem auto;
+        padding:0 5px 5px 5px;
       }
       .modalDetails{
         height: 90%;
