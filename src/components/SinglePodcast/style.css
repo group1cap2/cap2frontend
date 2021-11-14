@@ -57,7 +57,7 @@
 .modal_content {
   height: 80%;
   width: 80%;
-  color: black;
+  color: rgb(221, 221, 221);
   margin: 20px auto;
   padding: 10px;
   background-color: #d533af;
@@ -74,6 +74,8 @@
 .modalImg {
   width: 20rem;
   height: 24rem;
+  margin-left: 5px;
+
 }
 #closeIcon {
   font-weight: bolder;
@@ -86,7 +88,7 @@
 }
 #gifM {
   width: 100px;
-  height: 100px;
+  height: 60px;
 }
 .headerModal {
   width: 100%;
@@ -96,15 +98,15 @@
 }
 .itouns {
   margin-top: 5px;
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
 }
 .modalDetails {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #f6f6f6;
+  background: linear-gradient(90deg, rgba(63,33,64,1) 3%, rgba(67,57,96,1) 14%, rgba(45,65,97,1) 22%, rgba(22,48,67,1) 33%, rgba(5,5,5,1) 49%, rgba(5,5,5,1) 60%, rgba(5,5,5,1) 80%);
 }
 .details {
   width: 90%;
@@ -116,15 +118,20 @@
   align-content: center;
 }
 #name {
-  color: black;
+  color: rgb(221, 221, 221);
   font-size: 1.3rem;
 }
 audio {
-  width: 70%;
+  width: 500px;
 }
 #detailsIcon {
   color:  #d533af;
 }
+
+.desc {
+  width: 80%;
+}
+
 @media only screen and (max-width: 450px) {
   .modalDetails{
       flex-direction: column;
@@ -140,6 +147,9 @@ audio {
 @media only screen and (max-width: 750px) {
   .modalDetails{
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
   .modalImg{
     width: 50%;
