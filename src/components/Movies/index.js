@@ -15,7 +15,7 @@ const Movies = () => {
 
   useEffect(() => {
     getFavMovies();
-  }, []);
+  }, [added]);
 
   const getFavMovies = async () => {
     setIsLoading(true);

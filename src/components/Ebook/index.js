@@ -15,7 +15,7 @@ const Ebook = () => {
 
   useEffect(() => {
     getBooks();
-  }, [limit]);
+  }, [limit,search]);
 
   const getBooks = async () => {
     setIsLoading(true);
@@ -29,7 +29,7 @@ const Ebook = () => {
 
   useEffect(() => {
     getFavEbook();
-  }, []);
+  }, [added]);
 
   const getFavEbook = async () => {
     setIsLoading(true);
