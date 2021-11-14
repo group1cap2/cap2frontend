@@ -12,7 +12,6 @@ const Fav = () => {
   const [favPodcast, setFavPodcast] = useState([]);
   const [favEbook, setFavEbook] = useState([]);
   const [favMovie, setFavMovie] = useState([]);
-  
   let like = false;
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const Fav = () => {
   useEffect(() => {
     getFavEbook();
 
-  },[favEbook]);
+  },[]);
 
   const getFavEbook = async () => {
     const response = await axios.get(
@@ -61,6 +60,7 @@ const Fav = () => {
     );
     setFavMovie(response.data);
   };
+
 
   return (
     <div className="FavContainer">
@@ -92,9 +92,10 @@ const Fav = () => {
       {/* Ebook */}
       {favEbook.length !== 0 ? (
         <div className="singleCard">
-          {favEbook.map((elem, i) => (
-            <SingleBook elem={elem} delete={true} key={`b` + i} />
-          ))}
+          {favEbook.map((elem, i) => 
+           
+          (  <SingleBook elem={elem} delete={true} key={`b` + i} />)
+)}
         </div>
       ) : (
         ""
