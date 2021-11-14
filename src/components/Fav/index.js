@@ -16,7 +16,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavAudio();
-  }, []);
+  },[like]);
 
   const getFavAudio = async () => {
     const response = await axios.get(
@@ -27,7 +27,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavPodcast();
-  }, []);
+  },[like]);
 
   const getFavPodcast = async () => {
     const response = await axios.get(
@@ -40,7 +40,7 @@ const Fav = () => {
   useEffect(() => {
     getFavEbook();
 
-  },[]);
+  },[like]);
 
   const getFavEbook = async () => {
     const response = await axios.get(
@@ -52,7 +52,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavMovie();
-  }, []);
+  },[like]);
 
   const getFavMovie = async () => {
     const response = await axios.get(
@@ -71,7 +71,7 @@ const Fav = () => {
       {favMovie.length !== 0 ? (
         <div className="singleCard">
           {favMovie.map((elem, i) => {
-            return <SingleMovie elem={elem} delete={true} key={`m` + i} />;
+            return <SingleMovie elem={elem} like={like} delete={true} key={`m` + i} />;
           })}
         </div>
       ) : (
@@ -82,7 +82,7 @@ const Fav = () => {
       {favAduio.length !== 0 ? (
         <div className="singleCard">
           {favAduio.map((elem, i) => (
-            <SingleMusic elem={elem} delete={true} key={`a` + i} />
+            <SingleMusic elem={elem} delete={true}  like={like} key={`a` + i} />
           ))}
         </div>
       ) : (
@@ -94,7 +94,7 @@ const Fav = () => {
         <div className="singleCard">
           {favEbook.map((elem, i) => 
            
-          (  <SingleBook elem={elem} delete={true} key={`b` + i} />)
+          (  <SingleBook elem={elem} delete={true} like={like} key={`b` + i} />)
 )}
         </div>
       ) : (
@@ -105,7 +105,7 @@ const Fav = () => {
       {favPodcast.length !== 0 ? (
         <div className="singleCard">
           {favPodcast.map((elem, i) => (
-            <SinglePodcast elem={elem} delete={true} key={`p` + i} />
+            <SinglePodcast elem={elem} delete={true}  like={like} key={`p` + i} />
           ))}
         </div>
       ) : (
