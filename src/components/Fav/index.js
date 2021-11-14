@@ -15,7 +15,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavAudio();
-  },[favAduio]);
+  },[]);
 
   const getFavAudio = async () => {
     const response = await axios.get(
@@ -26,7 +26,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavPodcast();
-  },[favPodcast]);
+  },[]);
 
   const getFavPodcast = async () => {
     const response = await axios.get(
@@ -39,7 +39,7 @@ const Fav = () => {
   useEffect(() => {
     getFavEbook();
 
-  },[favEbook]);
+  },[]);
 
   const getFavEbook = async () => {
     const response = await axios.get(
@@ -51,7 +51,7 @@ const Fav = () => {
 
   useEffect(() => {
     getFavMovie();
-  },[favMovie]);
+  },[]);
 
   const getFavMovie = async () => {
     const response = await axios.get(
