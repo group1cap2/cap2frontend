@@ -83,7 +83,7 @@ const SingleMovie = (props) => {
             <video
               src={props.elem.previewUrl}
               width="500px"
-              height="300px"
+              height="400px"
               controls
             />
             <a href={`${props.elem.trackViewUrl}`}>
