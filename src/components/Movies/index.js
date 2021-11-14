@@ -38,7 +38,7 @@ const Movies = () => {
 
   useEffect(() => {
     getMovies();
-  }, [limit, search, moviesFav]);
+  }, [limit, search]);
 
   const getMovies = async () => {
     setIsLoading(true);

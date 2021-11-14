@@ -4,7 +4,7 @@ import ReactPlayer from "react-player";
 import { FaWindowClose } from "react-icons/fa";
 import Modal from "react-modal";
 import { CgDetailsMore } from "react-icons/cg";
-import { MdFavorite } from "react-icons/md";
+import { MdFavorite, MdDelete } from "react-icons/md";
 import "./style.css";
 
 
@@ -25,8 +25,7 @@ const SingleMusic = (props) => {
       song: elem,
       like: like,
     });
-    if (like) setLike(false);
-    else setLike(true);
+    setLike(true);
   };
 
   return (
@@ -34,9 +33,22 @@ const SingleMusic = (props) => {
         <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
         <h3 className="lable">{props.elem.kind}</h3>
-        <MdFavorite
-          className={like ? `iconlike` : `iconunlike`}
-          onClick={() => favorite(props.elem)}        />
+        {props.delete ? (
+          <MdDelete
+            className="iconunlike"
+            onClick={() => favorite(props.elem, true)}
+          />
+        ) : props.added ? (
+          <MdFavorite
+            className='iconlike'
+          />
+        ) : (
+          <MdFavorite
+            className={like ? 'iconlike' : 'iconunlike'}
+            onClick={() => favorite(props.elem, false)}
+          />
+        )}
+     
       </div>
       <img
         className="singleImg"

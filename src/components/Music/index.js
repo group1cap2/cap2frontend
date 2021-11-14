@@ -10,6 +10,29 @@ const Music = () => {
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
+  const [audioFav, setFavAudio] = useState([]);
+  let added = false;
+
+
+  useEffect(() => {
+    getFavAudio();
+  }, []);
+
+  const getFavAudio = async () => {
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
+    );
+    setFavAudio(response.data);
+  };
+  const setFav = (ele) => {
+    audioFav.forEach((audio) => {
+      if (audio.trackId === ele.trackId) {
+        added = true;
+      } else {
+        added = false;
+      }
+    });
+  };
 
   useEffect(() => {
     getMusic();
@@ -42,10 +65,12 @@ const Music = () => {
       {/* banner end */}
 
       <div className="audio">
-        {music.map((elem, i) => (
-          <SingleMusic elem={elem} key={i} />
-        ))}
+        {music.map((elem, i) => {
+          setFav(elem);
+          return <SingleMusic elem={elem} added={added} key={i} />;
+        })}
       </div>
+
       <div className="loadMore">
         <button
           onClick={() => {
