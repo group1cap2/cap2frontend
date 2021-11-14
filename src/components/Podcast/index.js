@@ -68,7 +68,7 @@ const Podcast = () => {
 
       <div className="singleCard">
         {podcasts.map((elem,i) =>  {
-          setFav(elem);
+          setFav(elem)
           return <SingleMovie elem={elem} added={added} key={i} />;
         })}
       </div>
@@ -80,5 +80,5 @@ const Podcast = () => {
       </div>
       </div>
   );
-};
+}
 export default Podcast;

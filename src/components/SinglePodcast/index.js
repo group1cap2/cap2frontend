@@ -46,7 +46,7 @@ const SinglePodcast = (props) => {
             onClick={() => favorite(props.elem, false)}
           />
         )}
-
+   </div>
       <img
         className="singleImg"
         src={props.elem.artworkUrl100.replace('100x100', '1200x1200')}
