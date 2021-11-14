@@ -10,6 +10,8 @@ const Ebook = () => {
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
   const [isLoading, setIsLoading] = useState(false);
+  const [ebookFav, setFavEbook] = useState([]);
+  let added = false;
 
   useEffect(() => {
     getBooks();
@@ -23,6 +25,31 @@ const Ebook = () => {
     setBooks(response.data);
     setIsLoading(false);
   };
+
+
+  useEffect(() => {
+    getFavEbook();
+  }, []);
+
+  const getFavEbook = async () => {
+    setIsLoading(true);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
+    );
+    setFavEbook(response.data);
+    setIsLoading(false);
+  };
+
+  const setFav = (element) => {
+    ebookFav.forEach((elm) => {
+      if (elm.trackId === element.trackId) {
+        added = true;
+      } else {
+        added = false;
+      }
+    });
+  };
+
 
   return (
     <div className="bookContainer">
@@ -42,9 +69,10 @@ const Ebook = () => {
       {/* banner end */}
 
       <div className="singleCard">
-        {books.map((elem, i) => (
-          <SingleBook elem={elem} key={i} />
-        ))}
+        {books.map((elem, i) => {
+          setFav(elem);
+          return (<SingleBook elem={elem} added={added} key={i}/>);
+        })}
       </div>
       <div className="loadMore">
         <button

@@ -7,9 +7,9 @@ import "./style.css";
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
-  const [limit , setLimit]= useState(20);
+  const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
-  const [isLoading , setIsLoading]= useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [moviesFav, setMoviesFav] = useState([]);
   let added = false;
 
@@ -18,10 +18,12 @@ const Movies = () => {
   }, []);
 
   const getFavMovies = async () => {
+    setIsLoading(true);
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
     );
     setMoviesFav(response.data);
+    setIsLoading(false);
   };
 
   const setFav = (movie) => {
@@ -65,15 +67,20 @@ const Movies = () => {
       {/* banner end */}
 
       <div className="audio">
-        {movies.map((elem,i) => {
+        {movies.map((elem, i) => {
           setFav(elem);
-          return (<SingleMovie elem={elem} added={added} key={i}/>);
+          return <SingleMovie elem={elem} added={added} key={i} />;
         })}
       </div>
-         
+
       <div className="loadMore">
-        <button onClick={()=>{setLimit(limit+4)}} className="vewMoreBtn">
-          {isLoading ? 'Loading...' : 'Load More'}
+        <button
+          onClick={() => {
+            setLimit(limit + 4);
+          }}
+          className="vewMoreBtn"
+        >
+          {isLoading ? "Loading..." : "Load More"}
         </button>
       </div>
     </div>
