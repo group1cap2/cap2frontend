@@ -19,7 +19,7 @@ const Movies = () => {
   const getFavMovies = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/getMoviesFavorite`
+      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
     );
     setMoviesFav(response.data);
     setIsLoading(false);
