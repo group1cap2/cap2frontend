@@ -10,7 +10,6 @@
   width: 250px;
 }
 
-
 /* card style */
 .singleImg {
     object-fit: contain;
@@ -167,7 +166,7 @@
         height: 50%; 
       }
       .itouns{
-        /* margin-top: 5px; */
+
         width: 6%;
         height: 6%;
     }
