@@ -21,7 +21,7 @@ const SingleMusic = (props) => {
   }
 
   const favorite = async (elem,type) => {
-    const response = await axios.put("http://localhost:5000/setMusicFavorite", {
+    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setMusicFavorite", {
       song: elem,
       like: type,
     });

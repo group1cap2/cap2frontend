@@ -18,7 +18,11 @@ const Fav = () => {
   }, [favAduio]);
 
   const getFavAudio = async () => {
-    const response = await axios.get(`http://localhost:5000/getMusicFavorite`);
+
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
+    );
+
     setFavAudio(response.data);
   };
 
@@ -28,7 +32,7 @@ const Fav = () => {
 
   const getFavPodcast = async () => {
     const response = await axios.get(
-      `http://localhost:5000/getPodcastsFavorite`
+      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
     );
     setFavPodcast(response.data);
   };
@@ -38,7 +42,11 @@ const Fav = () => {
   }, [favEbook]);
 
   const getFavEbook = async () => {
-    const response = await axios.get(`http://localhost:5000/getBooksFavorite`);
+
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
+    );
+
     setFavEbook(response.data);
   };
 
@@ -47,7 +55,11 @@ const Fav = () => {
   }, [favMovie]);
 
   const getFavMovie = async () => {
-    const response = await axios.get(`http://localhost:5000/getMoviesFavorite`);
+
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+    );
+
     setFavMovie(response.data);
   };
 

@@ -17,7 +17,7 @@ const Music = () => {
   }, []);
 
   const getFavAudio = async () => {
-    const response = await axios.get(`http://localhost:5000/getMusicFavorite`);
+    const response = await axios.get(`https://group1-cap2backend.herokuapp.com/getMusicFavorite`);
     setFavAudio(response.data);
   };
 
@@ -33,7 +33,7 @@ const Music = () => {
   const getMusic = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/music?search=${search}&limit=${limit}`
+      `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
     );
     setMusic(response.data);
     setIsLoading(false);

@@ -28,7 +28,7 @@ const Ebook = () => {
   const getBooks = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/books?search=${search}&limit=${limit}`
+      `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
     );
     setBooks(response.data);
     setIsLoading(false);
@@ -37,7 +37,7 @@ const Ebook = () => {
   const getFavEbook = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/getBooksFavorite`
+      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
     );
     setFavEbook(response.data);
     setIsLoading(false);

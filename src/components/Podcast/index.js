@@ -19,7 +19,7 @@ const Podcast = () => {
   const getFavPodcast = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/getPodcastsFavorite`
+      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
     );
     setFavPodcast(response.data);
     setIsLoading(false);
@@ -37,7 +37,7 @@ const Podcast = () => {
   const getPodcasts = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `http://localhost:5000/podcasts?search=${search}&limit=${limit}`
+      `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
     );
     setPodcasts(response.data);
     setIsLoading(false);

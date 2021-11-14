@@ -19,7 +19,7 @@ const SinglePodcast = (props) => {
   }
 
   const favorite = async (elem,type) => {
-    const response = await axios.put("http://localhost:5000/setPodcastFavorite", {
+    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setPodcastFavorite", {
       podcast: elem,
       like: type,
     });
