@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 .iconlike {
-  color: #cb31a7;
+  color:  #d533af;
   float: right;
   cursor: pointer;
   pointer-events: none;
@@ -60,7 +60,7 @@
   color: black;
   margin: 20px auto;
   padding: 10px;
-  background-color: #cb31a7;
+  background-color: #d533af;
   border: none;
 }
 .overlay {
@@ -123,7 +123,7 @@ audio {
   width: 70%;
 }
 #detailsIcon {
-  color: #cb31a7;
+  color:  #d533af;
 }
 @media only screen and (max-width: 450px) {
   .modalDetails{
