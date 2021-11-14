@@ -10,7 +10,7 @@ import "./style.css";
 
 const SingleMusic = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
-  const [like, setLike] = React.useState(false);
+  const [like, setLike] = React.useState(props.like);
 
   function openModal() {
     setIsOpen(true);
@@ -21,7 +21,7 @@ const SingleMusic = (props) => {
   }
 
   const favorite = async (elem,type) => {
-    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setMusicFavorite", {
+    const response = await axios.put("http://localhost:5000/setMusicFavorite", {
       song: elem,
       like: type,
     });
@@ -38,7 +38,7 @@ const SingleMusic = (props) => {
             className="iconunlike"
             onClick={() => favorite(props.elem, true)}
           />
-        ) : props.added ? (
+        ) : props.like ? (
           <MdFavorite
             className='iconlike'
           />

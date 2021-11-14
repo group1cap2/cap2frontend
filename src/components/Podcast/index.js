@@ -11,39 +11,33 @@ const Podcast = () => {
   const [search, setSearch] = useState("all");
   const [isLoading , setIsLoading]= useState(false);
   const [podcastFav, setFavPodcast] = useState([]);
-  let added = false; 
 
   useEffect(() => {
     getFavPodcast();
-  }, [added]);
+  }, []);
 
   const getFavPodcast = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
+      `http://localhost:5000/getPodcastsFavorite`
     );
     setFavPodcast(response.data);
     setIsLoading(false);
   };
 
-  const setFav = (podcast) => {
-    podcastFav.forEach((podcastFav) => {
-      if (podcastFav.trackId === podcast.trackId) {
-        added = true;
-      } else {
-        added = false;
-      }
-    });
-  };
+  useEffect(() => {
+    setLimit(20)
+    getPodcasts();
+  }, [search]);
 
   useEffect(() => {
     getPodcasts();
-  }, [limit, search]);
+  }, [limit]);
 
   const getPodcasts = async () => {
     setIsLoading(true);
     const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
+      `http://localhost:5000/podcasts?search=${search}&limit=${limit}`
     );
     setPodcasts(response.data);
     setIsLoading(false);
@@ -67,9 +61,12 @@ const Podcast = () => {
       {/* banner end */}
 
       <div className="singleCard">
-        {podcasts.map((elem,i) =>  {
-          setFav(elem)
-          return <SinglePodcast elem={elem} added={added} key={i} />;
+        {podcasts.map((elem) => {
+          if (podcastFav.find((podcast) => podcast.trackId == elem.trackId)) {
+            return <SinglePodcast elem={elem} like={true} key={elem.trackId} />;
+          } else {
+            return <SinglePodcast elem={elem} like={false} key={elem.trackId} />;
+          }
         })}
       </div>
 

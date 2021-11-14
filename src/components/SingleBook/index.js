@@ -20,7 +20,7 @@ const SingleBook = (props) => {
 
   const favorite = async (elem,type) => {
     const response = await axios.put(
-      "https://group1-cap2backend.herokuapp.com/setBookFavorite",
+      "http://localhost:5000/setBookFavorite",
       {
         book: elem,
         like: type,
@@ -39,7 +39,7 @@ const SingleBook = (props) => {
             className="iconunlike"
             onClick={() => favorite(props.elem, true)}
           />
-        ) : props.added ? (
+        ) : props.like ? (
           <MdFavorite
             className='iconlike'
           />
