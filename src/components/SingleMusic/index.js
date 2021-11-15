@@ -7,7 +7,6 @@ import { CgDetailsMore } from "react-icons/cg";
 import { MdFavorite, MdDelete } from "react-icons/md";
 import "./style.css";
 
-
 const SingleMusic = (props) => {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [like, setLike] = React.useState(props.like);
@@ -20,39 +19,43 @@ const SingleMusic = (props) => {
     setIsOpen(false);
   }
 
-  const favorite = async (elem,type) => {
-    const response = await axios.put("https://group1-cap2backend.herokuapp.com/setMusicFavorite", {
-      song: elem,
-      like: type,
-    });
+  const favorite = async (elem, type) => {
+    await axios.put(
+      "https://group1-cap2backend.herokuapp.com/setMusicFavorite",
+      {
+        song: elem,
+        like: type,
+      }
+    );
     setLike(true);
   };
 
   return (
     <div className="single">
-        <div className="cardIcons">
-        <CgDetailsMore onClick={openModal} className="icon"  id="detailsIcon"/>
-        {props.delete ? (<h3 className="lable">{props.elem.kind.toUpperCase()}</h3>) : ('') }
+      <div className="cardIcons">
+        <CgDetailsMore onClick={openModal} className="icon" id="detailsIcon" />
+        {props.delete ? (
+          <h3 className="lable">{props.elem.kind.toUpperCase()}</h3>
+        ) : (
+          ""
+        )}
         {props.delete ? (
           <MdDelete
             className="iconunlike"
             onClick={() => favorite(props.elem, true)}
           />
         ) : props.like ? (
-          <MdFavorite
-            className='iconlike'
-          />
+          <MdFavorite className="iconlike" />
         ) : (
           <MdFavorite
-            className={like ? 'iconlike' : 'iconunlike'}
+            className={like ? "iconlike" : "iconunlike"}
             onClick={() => favorite(props.elem, false)}
           />
         )}
-     
       </div>
       <img
         className="singleImg"
-        src={props.elem.artworkUrl100.replace('100x100', '1200x1200')}
+        src={props.elem.artworkUrl100.replace("100x100", "1200x1200")}
         alt={`card ${props.elem.collectionName}`}
       />
       <Modal
@@ -61,7 +64,7 @@ const SingleMusic = (props) => {
         className="modal"
         overlayClassName="overlay"
         contentLabel="Example Modal"
-        ariaHideApp={true}
+        ariaHideApp={false}
       >
         <div className="headerModal">
           <img
@@ -74,7 +77,7 @@ const SingleMusic = (props) => {
         <div className="modalDetails">
           <img
             className="modalImg"
-            src={props.elem.artworkUrl100.replace('100x100', '1200x1200')}
+            src={props.elem.artworkUrl100.replace("100x100", "1200x1200")}
             alt={`card ${props.elem.trackName}`}
           />
           <div className="details">
@@ -88,10 +91,12 @@ const SingleMusic = (props) => {
               className="aduioController"
             />
             <a href={`${props.elem.trackViewUrl}`}>
-            <img
-              className="itouns"
-              src="https://help.apple.com/assets/5FFC9741F7B393613B23EEF1/5FFC9742F7B393613B23EEF8/ar_EG/6c4ec679fc7e16151828b2ad053880a3.png"
-            /></a>
+              <img
+                alt={props.elem.trackName}
+                className="itouns"
+                src="https://help.apple.com/assets/5FFC9741F7B393613B23EEF1/5FFC9742F7B393613B23EEF8/ar_EG/6c4ec679fc7e16151828b2ad053880a3.png"
+              />
+            </a>
           </div>
         </div>
       </Modal>

@@ -9,6 +9,7 @@ const Music = () => {
   const [music, setMusic] = useState([]);
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
+  const [pageLoading, setPageLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [audioFav, setFavAudio] = useState([]);
 
@@ -26,13 +27,24 @@ const Music = () => {
   useEffect(() => {
     setLimit(20);
     getMusic();
+    // eslint-disable-next-line
   }, [search]);
 
   useEffect(() => {
-    getMusic();
+    moreMusic();
+    // eslint-disable-next-line
   }, [limit]);
 
   const getMusic = async () => {
+    setPageLoading(true);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
+    );
+    setMusic(response.data);
+    setPageLoading(false);
+  };
+
+  const moreMusic = async () => {
     setIsLoading(true);
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
@@ -58,11 +70,11 @@ const Music = () => {
       </div>
       {/* banner end */}
 
-      {!isLoading ? (
+      {!pageLoading ? (
         <>
           <div className="audio">
             {music.map((elem) => {
-              if (audioFav.find((song) => song.trackId == elem.trackId)) {
+              if (audioFav.find((song) => song.trackId === elem.trackId)) {
                 return (
                   <SingleMusic elem={elem} like={true} key={elem.trackId} />
                 );
@@ -81,7 +93,7 @@ const Music = () => {
               }}
               className="vewMoreBtn"
             >
-              Load More
+              {isLoading ? "Lodaing..." : "Load More"}
             </button>
           </div>
         </>

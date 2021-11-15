@@ -9,29 +9,41 @@ const Ebook = () => {
   const [books, setBooks] = useState([]);
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
+  const [pageLoading, setPageLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [ebookFav, setFavEbook] = useState([]);
 
   useEffect(() => {
     setLimit(20);
     getBooks();
+    // eslint-disable-next-line
   }, [search]);
 
   useEffect(() => {
-    getBooks();
+    moreBooks();
+    // eslint-disable-next-line
   }, [limit]);
 
   useEffect(() => {
     getFavEbook();
   }, []);
 
-  const getBooks = async () => {
+  const moreBooks = async () => {
     setIsLoading(true);
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
     );
     setBooks(response.data);
     setIsLoading(false);
+  };
+
+  const getBooks = async () => {
+    setPageLoading(true);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
+    );
+    setBooks(response.data);
+    setPageLoading(false);
   };
 
   const getFavEbook = async () => {
@@ -58,11 +70,11 @@ const Ebook = () => {
       </div>
       {/* banner end */}
 
-      {!isLoading ? (
+      {!pageLoading ? (
         <>
           <div className="singleCard">
             {books.map((elem) => {
-              if (ebookFav.find((book) => book.trackId == elem.trackId)) {
+              if (ebookFav.find((book) => book.trackId === elem.trackId)) {
                 return (
                   <SingleBook elem={elem} like={true} key={elem.trackId} />
                 );
@@ -81,7 +93,7 @@ const Ebook = () => {
               }}
               className="vewMoreBtn"
             >
-              Load More
+              {isLoading ? "Lodaing..." : "Load More"}
             </button>
           </div>
         </>
