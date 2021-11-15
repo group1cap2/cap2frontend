@@ -1,9 +1,12 @@
 # :musical_note: :mag:  iTunes Search API 
 
 [![node](https://img.shields.io/badge/node-%3E=_16.0-orange.svg?style=flat-square)](https://nodejs.org)
+<img width="1280" alt="Screen Shot 2021-11-15 at 7 19 02 AM" src="https://user-images.githubusercontent.com/92258765/141732316-3f133d15-cebb-4b20-a02a-6a6f213a6dde.png">
+
+<img width="1280" alt="Screen Shot 2021-11-15 at 7 22 29 AM" src="https://user-images.githubusercontent.com/92258765/141732236-60878748-624b-4577-9b3b-8ba6b2ec8852.png">
 
 
-<img width="1280" alt="Screen Shot 2021-11-13 at 6 53 18 PM" src="https://user-images.githubusercontent.com/92258765/141650874-f4d3039c-a47e-40e0-9e70-c603ddeb7de7.png">
+
 <img width="1280" alt="Screen Shot 2021-11-13 at 6 54 28 PM" src="https://user-images.githubusercontent.com/92258765/141657356-11125604-31c3-4d97-a2bd-b7dadd3ee52d.png">
 
 ## Table of contents
