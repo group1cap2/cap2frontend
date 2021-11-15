@@ -10,6 +10,7 @@ const Podcast = () => {
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+  const [pageLoading, setPageLoading] = useState(true);
   const [podcastFav, setFavPodcast] = useState([]);
 
   useEffect(() => {
@@ -26,13 +27,24 @@ const Podcast = () => {
   useEffect(() => {
     setLimit(20);
     getPodcasts();
+    // eslint-disable-next-line
   }, [search]);
 
   useEffect(() => {
-    getPodcasts();
+    morePodcasts();
+    // eslint-disable-next-line
   }, [limit]);
 
   const getPodcasts = async () => {
+    setPageLoading(true);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
+    );
+    setPodcasts(response.data);
+    setPageLoading(false);
+  };
+
+  const morePodcasts = async () => {
     setIsLoading(true);
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
@@ -58,12 +70,12 @@ const Podcast = () => {
       </div>
       {/* banner end */}
 
-      {!isLoading ? (
+      {!pageLoading ? (
         <>
           <div className="singleCard">
             {podcasts.map((elem) => {
               if (
-                podcastFav.find((podcast) => podcast.trackId == elem.trackId)
+                podcastFav.find((podcast) => podcast.trackId === elem.trackId)
               ) {
                 return (
                   <SinglePodcast elem={elem} like={true} key={elem.trackId} />
@@ -83,7 +95,7 @@ const Podcast = () => {
               }}
               className="vewMoreBtn"
             >
-              Load More
+              {isLoading ? "Lodaing..." : "Load More"}
             </button>
           </div>
         </>

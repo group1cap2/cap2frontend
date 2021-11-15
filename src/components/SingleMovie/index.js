@@ -19,7 +19,7 @@ const SingleMovie = (props) => {
   }
 
   const favorite = async (elem, type) => {
-    const response = await axios.put(
+    await axios.put(
       "https://group1-cap2backend.herokuapp.com/setMovieFavorite",
       {
         movie: elem,
@@ -33,23 +33,24 @@ const SingleMovie = (props) => {
     <div className="single">
       <div className="cardIcons">
         <CgDetailsMore onClick={openModal} className="icon" id="detailsIcon" />
-        {props.delete ? (<h3 className="lable">{props.elem.kind.toUpperCase()}</h3>) : ('') }
+        {props.delete ? (
+          <h3 className="lable">{props.elem.kind.toUpperCase()}</h3>
+        ) : (
+          ""
+        )}
         {props.delete ? (
           <MdDelete
             className="iconunlike"
             onClick={() => favorite(props.elem, true)}
           />
         ) : props.added ? (
-          <MdFavorite
-            className='iconlike'
-          />
+          <MdFavorite className="iconlike" />
         ) : (
           <MdFavorite
-            className={like ? 'iconlike' : 'iconunlike'}
+            className={like ? "iconlike" : "iconunlike"}
             onClick={() => favorite(props.elem, false)}
           />
         )}
-
       </div>
       <img
         className="singleImg"
@@ -82,12 +83,13 @@ const SingleMovie = (props) => {
             <h2 id="name">{props.elem.trackName}</h2>
             <video
               src={props.elem.previewUrl}
-              width="500px"
-              height="400px"
+              width="400px"
+              height="300px"
               controls
             />
             <a href={`${props.elem.trackViewUrl}`}>
               <img
+                alt={props.elem.trackName}
                 className="itouns"
                 src="https://help.apple.com/assets/5FFC9741F7B393613B23EEF1/5FFC9742F7B393613B23EEF8/ar_EG/6c4ec679fc7e16151828b2ad053880a3.png"
               />

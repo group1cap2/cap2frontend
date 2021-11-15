@@ -55,7 +55,7 @@
 }
 
 .modal_content {
-  height: 60%;
+  height: 50%;
   width: 80%;
   color: rgb(221, 221, 221);
   margin: 20px auto;
@@ -72,8 +72,8 @@
   background-color: rgba(0, 0, 0, 0.527);
 }
 .modalImg {
-  width: 20rem;
-  height: 24rem;
+  width: 28rem;
+  height: 30rem;
   margin-left: 5px;
 
 }

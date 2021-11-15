@@ -9,6 +9,7 @@ const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [limit, setLimit] = useState(20);
   const [search, setSearch] = useState("all");
+  const [pageLoading, setPageLoading] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [moviesFav, setMoviesFav] = useState([]);
 
@@ -26,13 +27,24 @@ const Movies = () => {
   useEffect(() => {
     setLimit(20);
     getMovies();
+    // eslint-disable-next-line
   }, [search]);
 
   useEffect(() => {
-    getMovies();
+    moreMovies();
+    // eslint-disable-next-line
   }, [limit]);
 
   const getMovies = async () => {
+    setPageLoading(true);
+    const response = await axios.get(
+      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
+    );
+    setMovies(response.data);
+    setPageLoading(false);
+  };
+
+  const moreMovies = async () => {
     setIsLoading(true);
     const response = await axios.get(
       `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
@@ -58,11 +70,11 @@ const Movies = () => {
       </div>
       {/* banner end */}
 
-      {!isLoading ? (
+      {!pageLoading ? (
         <>
           <div className="audio">
             {movies.map((elem) => {
-              if (moviesFav.find((movie) => movie.trackId == elem.trackId)) {
+              if (moviesFav.find((movie) => movie.trackId === elem.trackId)) {
                 return (
                   <SingleMovie elem={elem} like={true} key={elem.trackId} />
                 );
@@ -80,7 +92,7 @@ const Movies = () => {
               }}
               className="vewMoreBtn"
             >
-              Load More
+              {isLoading ? "Lodaing..." : "Load More"}
             </button>
           </div>
         </>
