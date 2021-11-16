@@ -16,6 +16,7 @@
   border-radius: 10px;
 }
 .cardIcons {
+  font-size: 120%;
   display: flex;
   justify-content: space-between;
   align-items: center;

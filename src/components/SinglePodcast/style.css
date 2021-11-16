@@ -16,6 +16,7 @@
   border-radius: 10px;
 }
 .cardIcons {
+  font-size: 120%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,17 +24,20 @@
   margin-bottom: 5px;
 }
 .icon {
+
   float: right;
   color: #fff;
   cursor: pointer;
 }
 .iconlike {
+  /* font-size: 120%; */
   color:  #d533af;
   float: right;
   cursor: pointer;
   pointer-events: none;
 }
 .iconunlike {
+  /* font-size: 120%; */
   color: #fff;
   float: right;
   cursor: pointer;
