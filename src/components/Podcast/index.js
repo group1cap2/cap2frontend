@@ -18,10 +18,17 @@ const Podcast = () => {
   }, []);
 
   const getFavPodcast = async () => {
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
-    );
-    setFavPodcast(response.data);
+    try {
+      
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
+      );
+      setFavPodcast(response.data);
+
+    } catch (error) {
+      
+    }
+
   };
 
   useEffect(() => {
@@ -37,19 +44,33 @@ const Podcast = () => {
 
   const getPodcasts = async () => {
     setPageLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
-    );
-    setPodcasts(response.data);
+    try {
+
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
+      );
+      setPodcasts(response.data);
+
+    } catch (error) {
+      
+    }
+
     setPageLoading(false);
   };
 
   const morePodcasts = async () => {
     setIsLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
-    );
-    setPodcasts(response.data);
+    try {
+
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/podcasts?search=${search}&limit=${limit}`
+      );
+      setPodcasts(response.data);
+      
+    } catch (error) {
+      
+    }
+
     setIsLoading(false);
   };
 

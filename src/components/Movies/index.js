@@ -18,10 +18,15 @@ const Movies = () => {
   }, []);
 
   const getFavMovies = async () => {
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
-    );
-    setMoviesFav(response.data);
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+      );
+      setMoviesFav(response.data);
+    } catch (error) {
+      
+    }
+
   };
 
   useEffect(() => {
@@ -37,19 +42,30 @@ const Movies = () => {
 
   const getMovies = async () => {
     setPageLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
-    );
-    setMovies(response.data);
+
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
+      );
+      setMovies(response.data);
+    } catch (error) {
+      
+    }
+
     setPageLoading(false);
   };
 
   const moreMovies = async () => {
     setIsLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
-    );
-    setMovies(response.data);
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/movies?search=${search}&limit=${limit}`
+      );
+      setMovies(response.data);
+    } catch (error) {
+      
+    }
+
     setIsLoading(false);
   };
 
