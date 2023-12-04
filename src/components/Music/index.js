@@ -18,10 +18,15 @@ const Music = () => {
   }, []);
 
   const getFavAudio = async () => {
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
-    );
-    setFavAudio(response.data);
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
+      );
+      setFavAudio(response.data);
+    } catch (error) {
+      
+    }
+
   };
 
   useEffect(() => {
@@ -37,19 +42,33 @@ const Music = () => {
 
   const getMusic = async () => {
     setPageLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
-    );
-    setMusic(response.data);
+
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
+      );
+      setMusic(response.data);
+    } catch (error) {
+      
+    }
+
     setPageLoading(false);
   };
 
   const moreMusic = async () => {
     setIsLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
-    );
-    setMusic(response.data);
+
+    try {
+
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/music?search=${search}&limit=${limit}`
+      );
+      setMusic(response.data);
+      
+    } catch (error) {
+      
+    }
+
     setIsLoading(false);
   };
 

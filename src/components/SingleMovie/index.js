@@ -19,14 +19,23 @@ const SingleMovie = (props) => {
   }
 
   const favorite = async (elem, type) => {
-    await axios.put(
-      "https://group1-cap2backend.herokuapp.com/setMovieFavorite",
-      {
-        movie: elem,
-        like: type,
-      }
-    );
-    setLike(true);
+    try {
+      await axios.put(
+        "https://group1-cap2backend.herokuapp.com/setMovieFavorite",
+        {
+          movie: elem,
+          like: type,
+        }
+      );
+
+      setLike(true);
+    } catch (error) { };
+
+    if (props?.reload)
+    {
+      props.reload(true);
+    };
+
   };
 
   return (

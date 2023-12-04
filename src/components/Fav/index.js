@@ -8,59 +8,89 @@ import { useState, useEffect } from "react";
 import "./style.css";
 
 const Fav = () => {
-  const [favAduio, setFavAudio] = useState([]);
+
+  const [favAudio, setFavAudio] = useState([]);
   const [favPodcast, setFavPodcast] = useState([]);
   const [favEbook, setFavEbook] = useState([]);
   const [favMovie, setFavMovie] = useState([]);
 
+  const [action, setAction] = useState(false);
+
   useEffect(() => {
+
+    getFavMovie();
+    getFavEbook();
+    getFavPodcast();
     getFavAudio();
-  },[favAduio]);
+
+  },[action]);
 
   const getFavAudio = async () => {
 
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
-    );
+    let response = [];
+    try {
+      response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getMusicFavorite`
+      );
 
-    setFavAudio(response.data);
+    } catch (error) {};
+
+    if(response.data) 
+    {
+      setFavAudio(response.data);
+    };
   };
-
-  useEffect(() => {
-    getFavPodcast();
-  },[favPodcast]);
 
   const getFavPodcast = async () => {
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
-    );
-    setFavPodcast(response.data);
-  };
 
-  useEffect(() => {
-    getFavEbook();
-  },[favEbook]);
+    let response = [];
+    try {
+
+      response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getPodcastsFavorite`
+      );
+
+    } catch (error) {};
+
+    if(response.data) 
+    {
+      setFavPodcast(response.data);
+    };
+  };
 
   const getFavEbook = async () => {
 
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
-    );
+    let response = [];
+    try {
+      response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
+      );
+    } catch (error) {};
 
-    setFavEbook(response.data);
+    if(response.data) 
+    {
+      setFavEbook(response.data);
+    };
   };
-
-  useEffect(() => {
-    getFavMovie();
-  },[favMovie]);
 
   const getFavMovie = async () => {
 
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
-    );
+    let response = [];
+    try {
+      response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getMoviesFavorite`
+      );
+    } catch (error) {};
 
-    setFavMovie(response.data);
+    if(response.data) 
+    {
+      setFavMovie(response.data);
+    };
+  };
+
+  const reload = async(req) =>
+  {
+    setAction(!action)
   };
 
   return (
@@ -72,7 +102,7 @@ const Fav = () => {
       {favMovie.length !== 0 ? (
         <div className="singleCard">
           {favMovie.map((elem, i) => {
-            return <SingleMovie elem={elem} delete={true} key={`m` + i} />;
+            return <SingleMovie elem={elem} delete={true} key={`m` + i} reload= {reload} />;
           })}
         </div>
       ) : (
@@ -80,10 +110,10 @@ const Fav = () => {
       )}
 
       {/* Audio */}
-      {favAduio.length !== 0 ? (
+      {favAudio.length !== 0 ? (
         <div className="singleCard">
-          {favAduio.map((elem, i) => (
-            <SingleMusic elem={elem} delete={true} key={`a` + i} />
+          {favAudio.map((elem, i) => (
+            <SingleMusic elem={elem} delete={true} key={`a` + i} reload= {reload} />
           ))}
         </div>
       ) : (
@@ -94,7 +124,7 @@ const Fav = () => {
       {favEbook.length !== 0 ? (
         <div className="singleCard">
           {favEbook.map((elem, i) => (
-            <SingleBook elem={elem} delete={true} key={`b` + i} />
+            <SingleBook elem={elem} delete={true} key={`b` + i} reload= {reload}/>
           ))}
         </div>
       ) : (
@@ -105,7 +135,7 @@ const Fav = () => {
       {favPodcast.length !== 0 ? (
         <div className="singleCard">
           {favPodcast.map((elem, i) => (
-            <SinglePodcast elem={elem} delete={true} key={`p` + i} />
+            <SinglePodcast elem={elem} delete={true} key={`p` + i} reload= {reload}/>
           ))}
         </div>
       ) : (

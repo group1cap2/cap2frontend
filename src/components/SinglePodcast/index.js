@@ -19,14 +19,26 @@ const SinglePodcast = (props) => {
   }
 
   const favorite = async (elem, type) => {
-    await axios.put(
-      "https://group1-cap2backend.herokuapp.com/setPodcastFavorite",
-      {
-        podcast: elem,
-        like: type,
-      }
-    );
-    setLike(true);
+    try {
+
+      await axios.put(
+        "https://group1-cap2backend.herokuapp.com/setPodcastFavorite",
+        {
+          podcast: elem,
+          like: type,
+        }
+      );
+
+      setLike(true);
+      
+    } catch (error) {
+
+    };
+
+    if (props?.reload)
+    {
+      props.reload(true);
+    };
   };
 
   return (

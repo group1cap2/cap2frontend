@@ -30,27 +30,44 @@ const Ebook = () => {
 
   const moreBooks = async () => {
     setIsLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
-    );
-    setBooks(response.data);
+
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
+      );
+      setBooks(response.data);
+
+    } catch (error) {}
     setIsLoading(false);
   };
 
   const getBooks = async () => {
     setPageLoading(true);
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
-    );
-    setBooks(response.data);
+
+    try {
+
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/books?search=${search}&limit=${limit}`
+      );
+      setBooks(response.data);
+
+    } catch (error) {
+      
+    }
+
     setPageLoading(false);
   };
 
   const getFavEbook = async () => {
-    const response = await axios.get(
-      `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
-    );
-    setFavEbook(response.data);
+    try {
+      const response = await axios.get(
+        `https://group1-cap2backend.herokuapp.com/getBooksFavorite`
+      );
+      setFavEbook(response.data);
+    } catch (error) {
+      
+    }
+
   };
 
   return (
